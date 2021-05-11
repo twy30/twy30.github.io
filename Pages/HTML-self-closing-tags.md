@@ -1,21 +1,23 @@
-# Self-closing HTML Tags
+# The Right Way to Use HTML Self-closing Tags
 
-If my understanding of
-[HTML 5.2](https://www.w3.org/TR/2021/SPSD-html52-20210128/) is correct,
+I have seen the `br` element written as `<br>`, `<br/>`, and `<br />`;
+which way is the right way?
 
-* Void elements (e.g. `br`, `hr`, `img`, and `input`) may be written as
-  `<br>`, `<br/>`, or `<br />`.
-  * The trailing slash `/` is optional for void elements.
-* Foreign elements may be written as either start-end tag pairs or
-  self-closing tags.
-  * The trailing slash `/` is required for self-closing foreign element
-    start tags.
+# HTML `br`
+
+All `<br>`, `<br/>`, and `<br />` are right; however, technically they
+are not self-closing tags.
 
 ## Void Elements
 
-https://www.w3.org/TR/2021/SPSD-html52-20210128/syntax.html#void-elements
+The `br` element is one of the
+[void elements](https://www.w3.org/TR/2021/SPSD-html52-20210128/syntax.html#void-elements)
+.  Technically, void elements have no end tags; the `/` is optional.
 
-> area, base, br, col, embed, hr, img, input, link, meta, param, source, track, wbr
+https://www.w3.org/TR/2021/SPSD-html52-20210128/syntax.html#writing-html-documents-elements
+
+> Void elements only have a start tag; end tags must not be specified
+> for void elements.
 
 https://www.w3.org/TR/2021/SPSD-html52-20210128/syntax.html#writing-html-documents-elements
 
@@ -24,9 +26,15 @@ https://www.w3.org/TR/2021/SPSD-html52-20210128/syntax.html#writing-html-documen
 
 ## Foreign Elements
 
-https://www.w3.org/TR/2021/SPSD-html52-20210128/syntax.html#foreign-elements
+[Foreign elements](https://www.w3.org/TR/2021/SPSD-html52-20210128/syntax.html#foreign-elements)
+can be written as either start-end tag pairs or self-closing tags; the
+`/` is required for self-closing tags.
 
-> Elements from the MathML namespace and the SVG namespace.
+https://www.w3.org/TR/2021/SPSD-html52-20210128/syntax.html#writing-html-documents-elements
+
+> Foreign elements must either have a start tag and an end tag, or a
+> start tag that is marked as self-closing, in which case they must not
+> have an end tag.
 
 https://www.w3.org/TR/2021/SPSD-html52-20210128/syntax.html#writing-html-documents-elements
 
@@ -38,16 +46,7 @@ https://www.w3.org/TR/2021/SPSD-html52-20210128/syntax.html#writing-html-documen
 > must not contain the character U+003C LESS-THAN SIGN (<) or an
 > ambiguous ampersand.
 
-## Start and End Tags
-
-https://www.w3.org/TR/2021/SPSD-html52-20210128/syntax.html#writing-html-documents-elements
-
-> Foreign elements must either have a start tag and an end tag, or a
-> start tag that is marked as self-closing, in which case they must not
-> have an end tag.
-
-> Void elements only have a start tag; end tags must not be specified
-> for void elements.
+## Start Tags
 
 https://www.w3.org/TR/2021/SPSD-html52-20210128/syntax.html#start-tags
 
