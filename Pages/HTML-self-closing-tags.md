@@ -1,18 +1,22 @@
-# The Right Way to Use HTML Self-closing Tags
+# The Right Way to Use HTML Self-Closing Tags
 
 I have seen the `br` element written as `<br>`, `<br/>`, and `<br />`;
 which way is the right way?
 
-# HTML `br`
+All `<br>`, `<br/>`, and `<br />` are right.  However, technically they
+are not self-closing tags because:
 
-All `<br>`, `<br/>`, and `<br />` are right; however, technically they
-are not self-closing tags.
+* `br` is a void element.
+  * A void element has a start tag but no end tag.
+  * The `/` is optional.
+* A foreign element can be written as either a start-end tag pair or a
+  self-closing tag.
 
 ## Void Elements
 
 The `br` element is one of the
 [void elements](https://www.w3.org/TR/2021/SPSD-html52-20210128/syntax.html#void-elements)
-.  Technically, void elements have no end tags; the `/` is optional.
+.
 
 https://www.w3.org/TR/2021/SPSD-html52-20210128/syntax.html#writing-html-documents-elements
 

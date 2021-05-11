@@ -1,14 +1,6 @@
 # The Right Way to Set HTML `lang`
 
-An example of `lang`:
-
-```HTML
-<html lang="en">
-```
-
-What is the right way to set `lang`?
-
-# IETF BCP 47 Language Tag
+Use an "IETF BCP 47 Language Tag".
 
 * [2.  The Language Tag](https://www.rfc-editor.org/rfc/rfc5646.html#section-2)
 * [Appendix A.  Examples of Language Tags (Informative)](https://www.rfc-editor.org/rfc/rfc5646.html#appendix-A)

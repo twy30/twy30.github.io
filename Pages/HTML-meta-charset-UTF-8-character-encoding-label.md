@@ -1,11 +1,5 @@
 # The Right Way to Set HTML `charset`
 
-An example of `charset`:
-
-```HTML
-<meta charset="UTF-8">
-```
-
 I have seen `charset` set to `UTF-8`, `utf-8`, `UTF8`, or `utf8`; which
 one is the right way?
 
