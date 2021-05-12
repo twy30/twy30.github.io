@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Markdown HTML Wrapper Template</title>
+</head>
+
+<body>
+    <pre id="Markdown-input">
 # The Right Way to Use HTML Self-Closing Tags
 
 I have seen the `br` element written as `<br>`, `<br/>`, and `<br />`;
@@ -58,3 +69,10 @@ https://www.w3.org/TR/2021/SPSD-html52-20210128/syntax.html#start-tags
 > a foreign element, then there may be a single U+002F SOLIDUS character
 > (/). This character has no effect on void elements, but on foreign
 > elements it marks the start tag as self-closing.
+    </pre>
+    <div id="HTML-output"></div>
+    <script defer src="/Markdown-HTML-wrapper/commonmark.min.js"></script>
+    <script defer src="/Markdown-HTML-wrapper/replace-Markdown-with-HTML.js"></script>
+</body>
+
+</html>

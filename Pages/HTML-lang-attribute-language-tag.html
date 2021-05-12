@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Markdown HTML Wrapper Template</title>
+</head>
+
+<body>
+    <pre id="Markdown-input">
 # The Right Way to Set HTML `lang`
 
 Use an "IETF BCP 47 Language Tag".
@@ -31,3 +42,10 @@ https://www.rfc-editor.org/info/rfc5646
 > IANA Language Subtag Registry
 
 https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry
+    </pre>
+    <div id="HTML-output"></div>
+    <script defer src="/Markdown-HTML-wrapper/commonmark.min.js"></script>
+    <script defer src="/Markdown-HTML-wrapper/replace-Markdown-with-HTML.js"></script>
+</body>
+
+</html>
