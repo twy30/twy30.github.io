@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Immutable;
 using System.IO;
 using System.Text;
-using static UpdatePages.StaticMethods;
 
 namespace UpdatePages
 {
@@ -13,59 +13,96 @@ namespace UpdatePages
             // other assets' locations.
             var workspacePath = string.Empty;
             {
-                const int index = 0;
-                if (arguments.Length <= index)
+                const int argumentIndex = 0;
+                if (arguments.Length <= argumentIndex)
                 {
-                    throw new ArgumentException($"Missing {nameof(arguments)}[{index}]: {nameof(workspacePath)}", nameof(arguments));
+                    throw new ArgumentException(
+                        $"{nameof(arguments)}[{argumentIndex}] `{nameof(workspacePath)}` must be specified.",
+                        nameof(arguments));
                 }
-                workspacePath = arguments[index];
+                workspacePath = arguments[argumentIndex];
             }
 
             // Get `template`, which will be used to update various
             // "pages".
-            var templatePath = Path.Combine(workspacePath, "Template", "CopyMe.html");
-            var templateString = File.ReadAllText(templatePath);
-            var template = new PageTemplate(templateString);
+            var template = default(PageTemplate);
+            {
+                var templatePath = Path.Combine(workspacePath, "Template", "CopyMe.html");
+                var templateString = File.ReadAllText(templatePath);
+                template = new PageTemplate(templateString);
+            }
 
             // Update `index.html`.
-            var indexPath = Path.Combine(workspacePath, "index.html");
-            Update(indexPath, template);
+            {
+                var indexPath = Path.Combine(workspacePath, "index.html");
+                Update(indexPath);
+            }
 
             // Update `Pages/*.html`.
-            var pagesPath = Path.Combine(workspacePath, "Pages");
-            foreach (var pagePath in Directory.EnumerateFiles(pagesPath, "*.html", SearchOption.AllDirectories))
             {
-                Update(pagePath, template);
+                var pagesPath = Path.Combine(workspacePath, "Pages");
+                var pagePaths = Directory.EnumerateFiles(
+                    pagesPath,
+                    "*.html",
+                    SearchOption.AllDirectories);
+                foreach (var pagePath in pagePaths)
+                {
+                    Update(pagePath);
+                }
+            }
+
+            void Update(string pagePath)
+            {
+                var pageString = File.ReadAllText(pagePath);
+                var page = new Page(pageString);
+
+                var pageBuilder = new StringBuilder();
+                var i = 0;
+                for (; i < page.Segments.Length; ++i)
+                {
+                    pageBuilder.Append(template.Segments[i]);
+                    pageBuilder.Append(page.Segments[i]);
+                }
+                pageBuilder.Append(template.Segments[i]);
+
+                File.WriteAllText(pagePath, pageBuilder.ToString());
             }
         }
 
         record PageTemplate
         {
-            public string BeforeTitle { get; init; }
-            public string AfterTitle_BeforeTextarea { get; init; }
-            public string AfterTextarea { get; init; }
+            public ImmutableArray<string> Segments { get; init; }
 
             public PageTemplate(string templateString)
             {
-                var index = 0;
-                var beforeTitle = new StringSegment(
-                    templateString,
-                    index,
-                    templateString.IndexOfEnd(titleMarker.Start, index));
-                BeforeTitle = beforeTitle.ToString();
-                index = templateString.IndexOf(titleMarker.End, beforeTitle.End, StringComparison.Ordinal);
-                var afterTitleBeforeTextarea = new StringSegment(
-                    templateString,
-                    index,
-                    templateString.IndexOfEnd(textareaMarker.Start, index));
-                AfterTitle_BeforeTextarea = afterTitleBeforeTextarea.ToString();
-                var afterTextarea = new StringSegment(
-                    templateString,
-                    templateString.IndexOf(textareaMarker.End, afterTitleBeforeTextarea.End, StringComparison.Ordinal),
-                    templateString.Length);
-                AfterTextarea = afterTextarea.ToString();
+                var segmentsBuilder = ImmutableArray.CreateBuilder<string>(segmentMarkers.Length + 1);
+                var startIndex = 0;
+                foreach (var marker in segmentMarkers)
+                {
+                    var segment = new StringSegment(
+                        templateString,
+                        startIndex,
+                        templateString.IndexOfEnd(marker.Start, startIndex));
+                    segmentsBuilder.Add(segment.ToString());
+                    startIndex = templateString.IndexOf(marker.End, segment.End, StringComparison.Ordinal);
+                }
+                segmentsBuilder.Add(templateString.Substring(startIndex));
+                Segments = segmentsBuilder.ToImmutable();
             }
         }
+
+        record SegmentMarker(string Start, string End);
+
+        static ImmutableArray<SegmentMarker> segmentMarkers = ImmutableArray.Create(
+            new SegmentMarker(
+                "\n<html lang=",
+                ">\n\n<head>\n"),
+            new SegmentMarker(
+                "\n    <title>",
+                "</title>\n"),
+            new SegmentMarker(
+                "\n    <textarea id=\"Markdown-input\" cols=\"80\" rows=\"24\">\n",
+                "\n    </textarea>\n    <div id=\"HTML-output\"></div>\n"));
 
         record StringSegment
         {
@@ -89,59 +126,50 @@ namespace UpdatePages
                 }
                 if (stringValue.Length < end)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(end), end, $"{nameof(end)} must not be greater than {nameof(stringValue)}.{nameof(stringValue.Length)} `{stringValue.Length}`.");
+                    throw new ArgumentOutOfRangeException(
+                        nameof(end),
+                        end,
+                        $"{nameof(end)} must not be greater than {nameof(stringValue)}.{nameof(stringValue.Length)} `{stringValue.Length}`.");
                 }
 
                 StringValue = stringValue;
                 Start = start;
                 End = end;
+
+                static void ThrowIfInvalid(int index)
+                {
+                    if (index < 0)
+                    {
+                        throw new ArgumentOutOfRangeException(
+                            nameof(index),
+                            index,
+                            $"{nameof(index)} must not be less than 0.");
+                    }
+                }
             }
 
             public override string ToString() => StringValue.Substring(Start, End - Start);
         }
 
-        record StringMarker(string Start, string End);
-
-        static readonly StringMarker titleMarker = new(
-            "<title>",
-            "</title>");
-        static readonly StringMarker textareaMarker = new(
-            "<textarea id=\"Markdown-input\" cols=\"80\" rows=\"24\">\n",
-            "\n    </textarea>\n    <div id=\"HTML-output\"></div>");
-
-        static void Update(string pagePath, PageTemplate pageTemplate)
+        record Page
         {
-            var pageString = File.ReadAllText(pagePath);
-            var page = new Page(pageString);
-            var updatedPageString = new StringBuilder()
-                .Append(pageTemplate.BeforeTitle)
-                .Append(page.Title)
-                .Append(pageTemplate.AfterTitle_BeforeTextarea)
-                .Append(page.Textarea)
-                .Append(pageTemplate.AfterTextarea)
-                .ToString();
-            File.WriteAllText(pagePath, updatedPageString);
-        }
-
-        class Page
-        {
-            public string Title { get; init; }
-            public string Textarea { get; init; }
+            public ImmutableArray<string> Segments { get; init; }
 
             public Page(string pageString)
             {
-                var index = pageString.IndexOfEnd(titleMarker.Start, 0);
-                var title = new StringSegment(
-                    pageString,
-                    index,
-                    pageString.IndexOf(titleMarker.End, index, StringComparison.Ordinal));
-                Title = title.ToString();
-                index = pageString.IndexOfEnd(textareaMarker.Start, title.End);
-                var textArea = new StringSegment(
-                    pageString,
-                    index,
-                    pageString.IndexOf(textareaMarker.End, index, StringComparison.Ordinal));
-                Textarea = textArea.ToString();
+                var segmentsBuilder = ImmutableArray.CreateBuilder<string>(segmentMarkers.Length);
+                var startIndex = 0;
+                foreach (var marker in segmentMarkers)
+                {
+                    startIndex = pageString.IndexOfEnd(marker.Start, startIndex);
+                    var segment = new StringSegment(
+                        pageString,
+                        startIndex,
+                        pageString.IndexOf(marker.End, startIndex, StringComparison.Ordinal));
+                    segmentsBuilder.Add(segment.ToString());
+                    startIndex = segment.End + marker.End.Length;
+                }
+                Segments = segmentsBuilder.ToImmutable();
             }
         }
     }
@@ -151,16 +179,11 @@ namespace UpdatePages
         public static int IndexOfEnd(this string stringValue, string marker, int startIndex)
         {
             var index = stringValue.IndexOf(marker, startIndex);
-            ThrowIfInvalid(index);
-            return index + marker.Length;
-        }
-
-        public static void ThrowIfInvalid(int index)
-        {
             if (index < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), index, $"{nameof(index)} must not be less than 0.");
+                return index;
             }
+            return index + marker.Length;
         }
     }
 }
