@@ -13,29 +13,44 @@
     <textarea id="Markdown-input" cols="80" rows="24">
 # How to Squash Git Commits
 
-Say we want to squash the last 3 commits.
+## How to Squash the Last N Commits in the Current Branch
 
-## `rebase -i` for Finer Control
+Say N is 3.
+
+The last 3 commits in the current branch are these 3 commits: `HEAD~2`,
+`HEAD~`, and `HEAD`.
+
+### `rebase -i` for Control
 
 ```Bash
 git rebase -i HEAD~3
 ```
 
-* `-i` is short for `--interactive`.
-* `rebase -i HEAD~3` reapplies `HEAD~2`, `HEAD~`, and `HEAD` (i.e. the
-  last 3 commits) on top of `HEAD~3`.
+`rebase -i HEAD~3` lets the user decide how to reapply each of "the
+commits after `HEAD~3`" on top of `HEAD~3`.
 
-## `reset --soft` for Simplicity
+* `-i` is short for `--interactive`.
+* "The commits after `HEAD~3`" are `HEAD~2`, `HEAD~`, and `HEAD`.
+
+### `reset --soft` for Simplicity
 
 ```Bash
 git reset --soft HEAD~3
 ```
 
-`reset --soft HEAD~3` resets `HEAD` to `HEAD~3` (without touching the
-workspace and the index).
+`reset --soft HEAD~3` resets `HEAD` to `HEAD~3`.
 
-* The then `HEAD~3` becomes the now `HEAD`, the latest commit.
-* The then `HEAD~2`, `HEAD~`, and `HEAD`'s changes become uncommitted.
+* Resetting `HEAD` to `HEAD~3` removes `HEAD~2`, `HEAD~`, and `HEAD`.
+* The `--soft` option leaves the removed commits' changes as is.
+
+## How to Squash a Branch
+
+```Bash
+git merge --squash _branch_
+```
+
+`merge --squash _branch_` condenses `_branch_`'s commits into one and
+stages the changes in the current branch.
     </textarea>
     <div id="HTML-output"></div>
     <script defer src="/Template/Markdown-to-HTML/commonmark.min.js"></script>
