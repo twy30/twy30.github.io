@@ -1,5 +1,5 @@
-* Visitors start here: [`www.twy30.com`](https://www.twy30.com).
-* Developers start here: [Template](Template/ReadMe.md).
+* [Visitors](https://www.twy30.com)
+* [Developers](Template/ReadMe.md)
 
 # GitHub Pages Artifacts
 

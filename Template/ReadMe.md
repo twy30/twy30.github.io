@@ -1,4 +1,4 @@
-# How to Create a New Page
+# How to Create a Page
 
 1. Copy the [`CopyMe.html`](CopyMe.html) template to the
    [`Pages`](../Pages) folder.
@@ -7,11 +7,21 @@
    * HTML `lang`
    * HTML `title`
    * HTML `textarea`
-3. See [UpdateIndex](Code/UpdateIndex/ReadMe.md) to update
-   [`index.html`](../index.html)'s table of contents.
 
-# How to Update the Template
+# How to Update the Table of Contents
 
-1. Edit the [`CopyMe.html`](CopyMe.html) template.
-2. See [UpdatePages](Code/UpdatePages/ReadMe.md) to update
-   [`index.html`](../index.html) and [Pages/*.html](../Pages).
+```Bash
+myWorkspacePath=$(git rev-parse --show-toplevel)
+pushd "${myWorkspacePath}"
+dotnet run --project Template/Code/UpdateIndex -- "${myWorkspacePath}"
+popd
+```
+
+# How to Apply Template Changes to all Pages
+
+```Bash
+myWorkspacePath=$(git rev-parse --show-toplevel)
+pushd "${myWorkspacePath}"
+dotnet run --project Template/Code/UpdatePages -- "${myWorkspacePath}"
+popd
+```

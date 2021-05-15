@@ -17,10 +17,10 @@
 
 Say N is 3.
 
-The last 3 commits in the current branch are these 3 commits: `HEAD~2`,
-`HEAD~`, and `HEAD`.
+The last 3 commits in the current branch are: `HEAD~2`, `HEAD~`, and
+`HEAD`.
 
-### `rebase -i` for Control
+### [`rebase -i`](https://git-scm.com/docs/git-rebase/2.20.0) for Control
 
 ```Bash
 git rebase -i HEAD~3
@@ -30,11 +30,9 @@ git rebase -i HEAD~3
 commits after `HEAD~3`" on top of `HEAD~3`.
 
 * `-i` is short for `--interactive`.
-* "The commits after `HEAD~3`" are `HEAD~2`, `HEAD~`, and `HEAD`.
+* "The commits after `HEAD~3`" are: `HEAD~2`, `HEAD~`, and `HEAD`.
 
-https://git-scm.com/docs/git-rebase/2.20.0
-
-### `reset --soft` for Simplicity
+### [`reset --soft`](https://git-scm.com/docs/git-reset/2.20.0) for Simplicity
 
 ```Bash
 git reset --soft HEAD~3
@@ -45,18 +43,15 @@ git reset --soft HEAD~3
 * Resetting `HEAD` to `HEAD~3` removes `HEAD~2`, `HEAD~`, and `HEAD`.
 * The `--soft` option leaves the removed commits' changes as is.
 
-https://git-scm.com/docs/git-reset/2.20.0
-
 ## How to Squash a Branch
 
+### [`merge --squash`](https://git-scm.com/docs/git-merge/2.20.0)
 ```Bash
 git merge --squash _branch_
 ```
 
 `merge --squash _branch_` condenses `_branch_`'s commits into one and
 stages the changes in the current branch.
-
-https://git-scm.com/docs/git-merge/2.20.0
     </textarea>
     <div id="HTML-output"></div>
     <script defer src="/Template/Markdown-to-HTML/commonmark.min.js"></script>

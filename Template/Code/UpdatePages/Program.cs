@@ -25,7 +25,7 @@ namespace UpdatePages
             var workspacePath = string.Empty;
             workspacePath = arguments.GetArgument(index: 0, nameof(workspacePath));
 
-            // Get `template`, which will be used to build 
+            // Get `template`, which will be used to build
             // `Pages/*.html`.
             var pageTemplate = default(Template);
             {
