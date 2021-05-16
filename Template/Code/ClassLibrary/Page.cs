@@ -1,26 +1,83 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Collections.ObjectModel;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace ClassLibrary
 {
     public record Page
     {
-        public ImmutableArray<string> Segments { get; init; }
+        public string TemplateStart { get; init; }
+        public ReadOnlyDictionary<SegmentMarker, string> Data { get; init; }
+        public ReadOnlyDictionary<SegmentMarker, string> TemplateEnd { get; init; }
 
-        public Page(string contents, IEnumerable<SegmentMarker> markers)
+        static readonly Dictionary<ReadOnlyCollection<SegmentMarker>, Regex> parserCache = new();
+
+        protected Page(string contents, ReadOnlyCollection<SegmentMarker> markers)
         {
-            var segmentsBuilder = ImmutableArray.CreateBuilder<string>();
-            var segmentStartIndex = 0;
-            foreach (var marker in markers)
+            if (!parserCache.TryGetValue(key: markers, out Regex? parser))
             {
-                segmentStartIndex = contents.IndexOfEnd(marker.Start, segmentStartIndex);
-                var segmentEndIndex = contents.IndexOf(marker.End, segmentStartIndex, StringComparison.Ordinal);
-                var segment = new Segment(contents, segmentStartIndex, segmentEndIndex);
-                segmentsBuilder.Add(segment.ToString());
-                segmentStartIndex = segment.End + marker.End.Length;
+                var patternBuilder = new StringBuilder();
+                patternBuilder.Append("^");
+                var escapedMarkers = new Dictionary<string, string>();
+                AddLazyTemplateParser(start: string.Empty, end: markers[0].Start);
+                int lastMarkerIndex = markers.Count - 1;
+                const string dataParser = "(.*?)";
+                for (var i = 0; i < lastMarkerIndex; ++i)
+                {
+                    patternBuilder.Append(dataParser);
+                    AddLazyTemplateParser(start: markers[i].End, end: markers[i + 1].Start);
+                }
+                patternBuilder.Append(dataParser);
+                AddGreedyTemplateParser(start: markers[lastMarkerIndex].End, end: string.Empty);
+                patternBuilder.Append("$");
+                parser = new Regex(patternBuilder.ToString(), RegexOptions.CultureInvariant | RegexOptions.Singleline);
+                parserCache[markers] = parser;
+
+                string GetEscapedMarker(string marker)
+                {
+                    if (!escapedMarkers.TryGetValue(key: marker, out string? escapedMarker))
+                    {
+                        escapedMarker = Regex.Escape(marker);
+                        escapedMarkers[marker] = escapedMarker;
+                    }
+                    return escapedMarker;
+                }
+
+                void AddLazyTemplateParser(string start, string end) => patternBuilder
+                    .Append("(")
+                    .Append(GetEscapedMarker(start))
+                    .Append(".*?")
+                    .Append(GetEscapedMarker(end))
+                    .Append(")");
+
+                void AddGreedyTemplateParser(string start, string end) => patternBuilder
+                    .Append("(")
+                    .Append(GetEscapedMarker(start))
+                    .Append(".*")
+                    .Append(GetEscapedMarker(end))
+                    .Append(")");
             }
-            Segments = segmentsBuilder.ToImmutable();
+            var matches = parser.Matches(contents);
+            if (matches.Count != 1)
+            {
+                throw new ArgumentException($"{nameof(contents)} and {nameof(markers)} must uniquely match.");
+            }
+            var match = matches[0];
+            TemplateStart = match.Groups[1].Value;
+            var data = new Dictionary<SegmentMarker, string>();
+            var templateEnd = new Dictionary<SegmentMarker, string>();
+            for (var i = 0; i < markers.Count; ++i)
+            {
+                var groupIndex = (i + 1) * 2;
+                var marker = markers[i];
+                data[marker] = match.Groups[groupIndex].Value;
+                templateEnd[marker] = match.Groups[groupIndex + 1].Value;
+            }
+            Data = new(data);
+            TemplateEnd = new(templateEnd);
         }
     }
 }

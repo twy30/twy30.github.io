@@ -1,9 +1,9 @@
-using System;
-using System.Collections.Immutable;
+using static ClassLibrary.HtmlPage;
+using static UpdateIndex.IndexPage;
+using ClassLibrary;
 using System.IO;
 using System.Linq;
 using System.Text;
-using ClassLibrary;
 
 namespace UpdateIndex
 {
@@ -11,53 +11,29 @@ namespace UpdateIndex
     {
         static void Main(string[] arguments)
         {
-            // Get `workspacePath`, which will be used to figure out
-            // other assets' location.
             var workspacePath = string.Empty;
-            workspacePath = arguments.GetArgument(index: 0, nameof(workspacePath));
+            workspacePath = arguments.GetArgument(index: 0, name: nameof(workspacePath));
 
-            // Get `indexSegmentMarkers`, which will be used to build
-            // `index.html`.
-            var indexSegmentMarkers = ImmutableArray.Create(
-                new SegmentMarker(
-                    Start: "\n<!-- <TableOfContents> -->\n",
-                    End: "\n<!-- </TableOfContents> -->\n"));
-
-            // Get `indexTemplate`, which will be used to build
-            // `index.html`.
-            var indexTemplate = default(Template);
+            var contentsBuilder = new StringBuilder();
             var indexPath = Path.Combine(workspacePath, "index.html");
+            var indexPage = new IndexPage(contents: File.ReadAllText(indexPath));
+            contentsBuilder.Append(indexPage.TemplateStart);
+            var tocBuilder = new StringBuilder(); // toc: Table of Contents
+            var pagePaths = Directory.EnumerateFiles(
+                Path.Combine(workspacePath, "Pages"),
+                searchPattern: "*.html",
+                SearchOption.AllDirectories);
+            foreach (var path in pagePaths.OrderBy(_ => _))
             {
-                var contents = File.ReadAllText(indexPath);
-                indexTemplate = new Template(contents, indexSegmentMarkers);
+                var page = new HtmlPage(contents: File.ReadAllText(path));
+                var title = page.Data[Title];
+                var link = path.Substring(workspacePath.Length);
+                tocBuilder.AppendFormat(format: "* [{0}]({1})", title, link);
+                tocBuilder.AppendLine();
             }
-
-            // Update `index.html`.
-            {
-                var indexBuilder = new StringBuilder();
-                const int beforeTableOfContents = 0;
-                indexBuilder.Append(indexTemplate.Segments[beforeTableOfContents]);
-                // Build the table of contents.
-                {
-                    var pagesPath = Path.Combine(workspacePath, "Pages");
-                    var pagePaths = Directory.EnumerateFiles(pagesPath, searchPattern: "*.html", SearchOption.AllDirectories);
-                    foreach (var path in pagePaths.OrderBy(_ => _))
-                    {
-                        var contents = File.ReadAllText(path);
-                        var page = new Page(contents, UpdatePages.Program.pageSegmentMarkers);
-                        const int titleSegment = 1;
-                        indexBuilder.AppendFormat(
-                            "* [{0}]({1})",
-                            page.Segments[titleSegment],
-                            path.Substring(path.IndexOfEnd(workspacePath, startIndex: 0)));
-                        indexBuilder.AppendLine();
-                    }
-                }
-                const int afterTableOfContents = 1;
-                indexBuilder.Append(indexTemplate.Segments[afterTableOfContents]);
-
-                File.WriteAllText(indexPath, indexBuilder.ToString());
-            }
+            contentsBuilder.Append(tocBuilder.ToString());
+            contentsBuilder.Append(indexPage.TemplateEnd[TableOfContents]);
+            File.WriteAllText(indexPath, contentsBuilder.ToString());
         }
     }
 }
