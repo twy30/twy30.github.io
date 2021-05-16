@@ -14,6 +14,6 @@ var htmlOutputElement = document.getElementById("HTML-output")
 var htmlOutput = htmlRenderer.render(markdownParser.parse(markdownInput));
 htmlOutputElement.innerHTML = htmlOutput;
 
-// If we reach here, we know there has not been any obvious failure.
-// Now we can remove the Markdown input element.
+// If the code reaches here, there has not been any obvious failure.
+// Now the Markdown input element can be removed.
 markdownInputElement.remove();
