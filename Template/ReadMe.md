@@ -1,7 +1,7 @@
 # How to Create a Page
 
 1. Copy the [`CopyMe.html`](CopyMe.html) template to the
-   [`Pages`](../Pages) folder.
+   [`Pages`](../Pages) directory.
 2. Edit the copied template to customize it.
    * Filename
    * HTML `lang`
