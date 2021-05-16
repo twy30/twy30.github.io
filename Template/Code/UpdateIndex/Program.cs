@@ -1,4 +1,5 @@
 using static ClassLibrary.HtmlPage;
+using static ClassLibrary.Statics;
 using static UpdateIndex.IndexPage;
 using ClassLibrary;
 using System.IO;
@@ -15,13 +16,13 @@ namespace UpdateIndex
             workspacePath = arguments.GetArgument(index: 0, name: nameof(workspacePath));
 
             var contentsBuilder = new StringBuilder();
-            var indexPath = Path.Combine(workspacePath, "index.html");
+            var indexPath = Path.Combine(workspacePath, index_html);
             var indexPage = new IndexPage(contents: File.ReadAllText(indexPath));
             contentsBuilder.Append(indexPage.TemplateStart);
             var tocBuilder = new StringBuilder(); // toc: Table of Contents
             var pagePaths = Directory.EnumerateFiles(
-                Path.Combine(workspacePath, "Pages"),
-                searchPattern: "*.html",
+                Path.Combine(workspacePath, Pages),
+                htmlSearchPattern,
                 SearchOption.AllDirectories);
             foreach (var path in pagePaths.OrderBy(_ => _))
             {

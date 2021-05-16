@@ -1,4 +1,5 @@
 using static ClassLibrary.HtmlPage;
+using static ClassLibrary.Statics;
 using ClassLibrary;
 using System.IO;
 using System.Text;
@@ -11,12 +12,12 @@ namespace UpdatePages
         {
             var workspacePath = string.Empty;
             workspacePath = arguments.GetArgument(index: 0, nameof(workspacePath));
-            var template = new HtmlPage(contents: File.ReadAllText(Path.Combine(workspacePath, "Template", "CopyMe.html")));
-            Update(Path.Combine(workspacePath, "index.html"));
+            var template = new HtmlPage(contents: File.ReadAllText(Path.Combine(workspacePath, Template, CopyMe_html)));
+            Update(Path.Combine(workspacePath, index_html));
 
             var pagePaths = Directory.EnumerateFiles(
-                Path.Combine(workspacePath, "Pages"),
-                searchPattern: "*.html",
+                Path.Combine(workspacePath, Pages),
+                htmlSearchPattern,
                 SearchOption.AllDirectories);
             foreach (var path in pagePaths)
             {
@@ -28,10 +29,10 @@ namespace UpdatePages
                 var contentsBuilder = new StringBuilder();
                 contentsBuilder.Append(template.TemplateStart);
                 var page = new HtmlPage(contents: File.ReadAllText(path));
-                for (var i = 0; i < Markers.Count; ++i)
+                foreach (var marker in Markers)
                 {
-                    contentsBuilder.Append(page.Data[Markers[i]]);
-                    contentsBuilder.Append(template.TemplateEnd[Markers[i]]);
+                    contentsBuilder.Append(page.Data[marker]);
+                    contentsBuilder.Append(template.TemplateEnd[marker]);
                 }
                 File.WriteAllText(path, contentsBuilder.ToString());
             }

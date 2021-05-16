@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -9,11 +8,11 @@ namespace ClassLibrary
 {
     public record Page
     {
+        static readonly Dictionary<ReadOnlyCollection<SegmentMarker>, Regex> parserCache = new();
+
         public string TemplateStart { get; init; }
         public ReadOnlyDictionary<SegmentMarker, string> Data { get; init; }
         public ReadOnlyDictionary<SegmentMarker, string> TemplateEnd { get; init; }
-
-        static readonly Dictionary<ReadOnlyCollection<SegmentMarker>, Regex> parserCache = new();
 
         protected Page(string contents, ReadOnlyCollection<SegmentMarker> markers)
         {
