@@ -14,7 +14,6 @@ namespace UpdateIndex
         {
             var workspacePath = string.Empty;
             workspacePath = arguments.GetArgument(index: 0, name: nameof(workspacePath));
-
             var contentsBuilder = new StringBuilder();
             var indexPath = Path.Combine(workspacePath, index_html);
             var indexPage = new IndexPage(contents: File.ReadAllText(indexPath));
