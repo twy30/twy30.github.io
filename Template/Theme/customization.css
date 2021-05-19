@@ -1,0 +1,18 @@
+blockquote {
+    border-left: .25em solid var(--bs-gray);
+    margin-left: .5em;
+    padding-left: .5em;
+}
+
+code:not(.hljs) {
+    background-color: rgb(30, 30, 30);
+    border-radius: .4em;
+    color: #C0C0C0;
+    padding: .2em .4em;
+}
+
+kbd {
+    background-color: rgb(30, 30, 30);
+    border: .3em outset #A0A0A0;
+    padding: .2em .4em;
+}
