@@ -32,7 +32,7 @@ namespace ClassLibrary
                 patternBuilder.Append(dataParser);
                 AddGreedyTemplateParser(start: markers[lastMarkerIndex].End, end: string.Empty);
                 patternBuilder.Append("$");
-                parser = new Regex(patternBuilder.ToString(), RegexOptions.CultureInvariant | RegexOptions.Singleline);
+                parser = new(patternBuilder.ToString(), RegexOptions.CultureInvariant | RegexOptions.Singleline);
                 parserCache[markers] = parser;
 
                 string GetEscapedMarker(string marker)
