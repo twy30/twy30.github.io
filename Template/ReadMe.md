@@ -8,12 +8,16 @@
    * HTML `title`
    * HTML `textarea`
 
+```Bash
+cp Template/CopyMe.html Pages/
+```
+
 # How to Update the Table of Contents
 
 ```Bash
 myWorkspacePath=$(git rev-parse --show-toplevel)
 pushd "${myWorkspacePath}"
-dotnet run --project Template/Code/UpdateIndex -- "${myWorkspacePath}"
+dotnet run --project Template/Code/UpdateIndex/ -- "${myWorkspacePath}"
 popd
 ```
 
@@ -22,6 +26,6 @@ popd
 ```Bash
 myWorkspacePath=$(git rev-parse --show-toplevel)
 pushd "${myWorkspacePath}"
-dotnet run --project Template/Code/UpdatePages -- "${myWorkspacePath}"
+dotnet run --project Template/Code/UpdatePages/ -- "${myWorkspacePath}"
 popd
 ```
