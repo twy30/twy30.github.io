@@ -16,15 +16,17 @@
 
 ```Bash
 git clone https://github.com/highlightjs/highlight.js.git
-git checkout tags/10.7.2
+git checkout tags/11.0.0
 npm install
-node tools/build.js --target browser bash typescript xml
+node tools/build.js --target cdn bash typescript xml
 ```
 
-* [`10.7.2`](https://github.com/highlightjs/highlight.js/releases/tag/10.7.2)
-  is the latest release as of 2021-05-16.
+* [`11.0.0`](https://github.com/highlightjs/highlight.js/releases/tag/11.0.0)
+  is the latest release as of 2021-06-03.
 * See `tools/build.js` for more details on build targets.
-  * The built assets are placed in `build` directory.
+  * The built assets are placed in `build` directory.  For example:
+    * `build/highlight.min.js`
+    * `build/styles/vs2015.min.css`
 * Supported languages: `src/languages/lib/*.js`.
   * Each language `.js` file lists its names and aliases.  For example:
     * `bash.js`:
