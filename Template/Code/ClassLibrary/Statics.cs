@@ -4,6 +4,7 @@ namespace ClassLibrary
 {
     public static class Statics
     {
+        public const string _404_html = "404.html";
         public const string CopyMe_html = "CopyMe.html";
         public const string htmlSearchPattern = "*.html";
         public const string index_html = "index.html";

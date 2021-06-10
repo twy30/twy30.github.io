@@ -36,7 +36,9 @@ popd
 ## [Bootstrap](https://github.com/twbs/bootstrap/tags)
 
 ```Bash
-pushd Template/Theme/
+myWorkspacePath=$(git rev-parse --show-toplevel)
+pushd "${myWorkspacePath}"
+cd Template/Theme/
 curl  --remote-name --url https://raw.githubusercontent.com/twbs/bootstrap/v5.0.1/dist/js/bootstrap.bundle.min.js
 popd
 ```
@@ -44,7 +46,9 @@ popd
 ## [Bootswatch](https://github.com/thomaspark/bootswatch/tags)
 
 ```Bash
-pushd Template/Theme/
+myWorkspacePath=$(git rev-parse --show-toplevel)
+pushd "${myWorkspacePath}"
+cd Template/Theme/
 curl  --remote-name --url https://raw.githubusercontent.com/thomaspark/bootswatch/v5.0.1/dist/cyborg/bootstrap.min.css
 popd
 ```
@@ -52,7 +56,9 @@ popd
 ## [CommonMark](https://github.com/commonmark/commonmark.js/tags)
 
 ```Bash
-pushd Template/Markdown-to-HTML/
+myWorkspacePath=$(git rev-parse --show-toplevel)
+pushd "${myWorkspacePath}"
+cd Template/Markdown-to-HTML/
 curl  --remote-name --url https://raw.githubusercontent.com/commonmark/commonmark.js/0.29.3/dist/commonmark.min.js
 popd
 ```

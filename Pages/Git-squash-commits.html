@@ -21,7 +21,7 @@ Say N is 3.
 The last 3 commits in the current branch are: `HEAD~2`, `HEAD~`, and
 `HEAD`.
 
-### [`rebase -i`](https://git-scm.com/docs/git-rebase/2.20.0) for Control
+### [`rebase -i`](https://git-scm.com/docs/git-rebase/2.20.0#Documentation/git-rebase.txt--i) for Control
 
 ```Bash
 git rebase -i HEAD~3
@@ -30,10 +30,12 @@ git rebase -i HEAD~3
 `rebase -i HEAD~3` lets the user decide how to reapply each of "the
 commits after `HEAD~3`" on top of `HEAD~3`.
 
-* `-i` is short for `--interactive`.
+* [`-i`](https://git-scm.com/docs/git-rebase/2.20.0#Documentation/git-rebase.txt--i)
+  is short for
+  [`--interactive`](https://git-scm.com/docs/git-rebase/2.20.0#Documentation/git-rebase.txt---interactive).
 * "The commits after `HEAD~3`" are: `HEAD~2`, `HEAD~`, and `HEAD`.
 
-### [`reset --soft`](https://git-scm.com/docs/git-reset/2.20.0) for Simplicity
+### [`reset --soft`](https://git-scm.com/docs/git-reset/2.20.0#Documentation/git-reset.txt---soft) for Simplicity
 
 ```Bash
 git reset --soft HEAD~3
@@ -46,15 +48,25 @@ git reset --soft HEAD~3
 
 ## How to Squash a Branch
 
-### [`merge --squash`](https://git-scm.com/docs/git-merge/2.20.0)
+### [`merge --squash`](https://git-scm.com/docs/git-merge/2.20.0#Documentation/git-merge.txt---squash)
 ```Bash
 git merge --squash _branch_
 ```
 
-`merge --squash _branch_` condenses `_branch_`'s commits into one and
-stages the changes in the current branch.
+`merge --squash _branch_` stages all of `_branch_`'s changes in the
+current branch.
     </textarea>
     <div id="HTML-output"></div>
+    <div lang="en">
+        <a href="https://github.com/twy30/twy30.github.io/discussions/categories/chat-q-a">
+            Chat / Q&A
+        </a>
+    </div>
+    <div lang="zh-Hant">
+        <a href="https://github.com/twy30/twy30.github.io/discussions/categories/%E9%96%92%E8%81%8A-%E5%95%8F%E7%AD%94">
+            閒聊／問答
+        </a>
+    </div>
     <script defer src="/Template/Markdown-to-HTML/commonmark.min.js"></script>
     <script defer src="/Template/Markdown-to-HTML/initialize.js"></script>
     <script defer src="/Template/Theme/bootstrap.bundle.min.js"></script>

@@ -13,6 +13,7 @@ namespace UpdatePages
             var workspacePath = string.Empty;
             workspacePath = arguments.GetArgument(index: 0, nameof(workspacePath));
             var template = new HtmlPage(contents: File.ReadAllText(Path.Combine(workspacePath, Template, CopyMe_html)));
+            Update(Path.Combine(workspacePath, _404_html));
             Update(Path.Combine(workspacePath, index_html));
             var pagePaths = Directory.EnumerateFiles(
                 Path.Combine(workspacePath, Pages),
