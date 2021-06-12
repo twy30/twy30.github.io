@@ -16,26 +16,54 @@
 
 ```Bash
 git clone https://github.com/highlightjs/highlight.js.git
+cd highlight.js/
 git checkout tags/11.0.1
 npm install
 node tools/build.js --target cdn bash typescript xml
 ```
 
-* [`11.0.1`](https://github.com/highlightjs/highlight.js/releases/tag/11.0.1)
-  is the latest release as of 2021-06-09.
-* See `tools/build.js` for more details on build targets.
-  * The built assets are placed in `build` directory.  For example:
-    * `build/highlight.min.js`
-    * `build/styles/vs2015.min.css`
-* Supported languages: `src/languages/lib/*.js`.
-  * Each language `.js` file lists its names and aliases.  For example:
-    * `bash.js`:
-      * Name: `Bash`
-      * Aliases: `sh` and `zsh`
-    * `xml.js`:
-      * Name: `HTML`, `XML`
-      * Aliases: `html`, `xhtml`, `rss`, `atom`, `xjb`, `xsd`, `xsl`,
-        `plist`, `wsf`, `svg`
+The built assets are placed in the `build` directory.  For example:
+
+* `/build/highlight.min.js`
+* `/build/styles/vs2015.min.css`
+
+See `/tools/build.js` for more details on build targets.
+
+## [Supported Languages](https://github.com/highlightjs/highlight.js/tree/11.0.1/src/languages)
+
+Each language `.js` file lists its names and aliases.  For example:
+
+### [`bash.js`](https://github.com/highlightjs/highlight.js/blob/11.0.1/src/languages/bash.js#L126-L127)
+
+```TypeScript
+    name: 'Bash',
+    aliases: ['sh'],
+```
+
+### [`typescript.js`](https://github.com/highlightjs/highlight.js/blob/11.0.1/src/languages/typescript.js#L92-L93)
+
+```TypeScript
+    name: 'TypeScript',
+    aliases: ['ts', 'tsx']
+```
+
+### [`xml.js`](https://github.com/highlightjs/highlight.js/blob/11.0.1/src/languages/xml.js#L77-L89)
+
+```TypeScript
+    name: 'HTML, XML',
+    aliases: [
+      'html',
+      'xhtml',
+      'rss',
+      'atom',
+      'xjb',
+      'xsd',
+      'xsl',
+      'plist',
+      'wsf',
+      'svg'
+    ],
+```
     </textarea>
     <div id="HTML-output"></div>
     <div lang="en">

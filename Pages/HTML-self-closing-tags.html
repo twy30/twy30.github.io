@@ -14,8 +14,29 @@
     <textarea id="Markdown-input" cols="80" rows="24">
 # How to Use HTML Self-Closing Tags
 
-* A foreign element can be written as a self-closing tag.
-* A void element can be written *like* a self-closing tag.
+A foreign element's start tag can be marked as self-closing; for
+example:
+
+```HTML
+<!-- Elements from the SVG namespace are foreign elements. -->
+<svg>
+    <!--
+        This `circle` element's start tag is marked as self-closing by
+        the `/` character.
+    -->
+    <circle cx="42" cy="42" r="42" />
+</svg>
+```
+
+A void element can *look like* a self-closing tag; for example:
+
+```HTML
+<!--
+    A void element, such as this `hr` element, has no end tag.  The `/`
+    character is optional.
+-->
+<hr />
+```
 
 ## References
 
