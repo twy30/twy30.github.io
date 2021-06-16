@@ -11,5 +11,8 @@ cp Template/CopyMe.html "${myNewPageRelativePath}"
 # Open the new page in VSCode.
 code "${myNewPageRelativePath}"
 
+# Update the table of contents.
+bash Template/update-index.bash
+
 # Change directory back.
 popd

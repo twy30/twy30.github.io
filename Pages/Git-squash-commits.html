@@ -14,48 +14,35 @@
     <textarea id="Markdown-input" cols="80" rows="24">
 # How to Squash Git Commits
 
-## How to Squash the Last N Commits in the Current Branch
+* `rebase --interactive` for granularity
+* `reset --soft` for simplicity
+* `merge --squash` for branches
 
-Say N is 3.
+# References
 
-The last 3 commits in the current branch are: `HEAD~2`, `HEAD~`, and
-`HEAD`.
-
-### [`rebase -i`](https://git-scm.com/docs/git-rebase/2.20.0#Documentation/git-rebase.txt--i) for Control
+[`rebase --interactive`](https://git-scm.com/docs/git-rebase/2.20.0#Documentation/git-rebase.txt---interactive):
 
 ```Bash
-git rebase -i HEAD~3
+# Let the user choose how the commits after `HEAD~3` will be reapplied.
+
+git rebase --interactive HEAD~3
 ```
 
-`rebase -i HEAD~3` lets the user decide how to reapply each of "the
-commits after `HEAD~3`" on top of `HEAD~3`.
-
-* [`-i`](https://git-scm.com/docs/git-rebase/2.20.0#Documentation/git-rebase.txt--i)
-  is short for
-  [`--interactive`](https://git-scm.com/docs/git-rebase/2.20.0#Documentation/git-rebase.txt---interactive).
-* "The commits after `HEAD~3`" are: `HEAD~2`, `HEAD~`, and `HEAD`.
-
-### [`reset --soft`](https://git-scm.com/docs/git-reset/2.20.0#Documentation/git-reset.txt---soft) for Simplicity
+[`reset --soft`](https://git-scm.com/docs/git-reset/2.20.0#Documentation/git-reset.txt---soft):
 
 ```Bash
+# Reset `HEAD` to `HEAD~3` and leave the changes after `HEAD~3` as is.
+
 git reset --soft HEAD~3
 ```
 
-`reset --soft HEAD~3` resets `HEAD` to `HEAD~3`.
-
-* Resetting `HEAD` to `HEAD~3` removes `HEAD~2`, `HEAD~`, and `HEAD`.
-* The `--soft` option leaves the removed commits' changes as is.
-
-## How to Squash a Branch
-
-### [`merge --squash`](https://git-scm.com/docs/git-merge/2.20.0#Documentation/git-merge.txt---squash)
+[`merge --squash`](https://git-scm.com/docs/git-merge/2.20.0#Documentation/git-merge.txt---squash):
 
 ```Bash
-git merge --squash _branch_
-```
+# Stages changes from `_branch_B_` in the current branch.
 
-`merge --squash _branch_` stages all of `_branch_`'s changes in the
-current branch.
+git merge --squash _branch_B_
+```
     </textarea>
     <div id="HTML-output"></div>
     <div lang="en">

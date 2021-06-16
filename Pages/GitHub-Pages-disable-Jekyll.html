@@ -14,6 +14,17 @@
     <textarea id="Markdown-input" cols="80" rows="24">
 # How to Disable GitHub Pages Jekyll
 
+```Bash
+myGitRepositoryRootPath=$(git rev-parse --show-toplevel)
+cd "${myGitRepositoryRootPath}"
+myNoJekyllFilename=.nojekyll
+touch "${myNoJekyllFilename}"
+git add "${myNoJekyllFilename}"
+git commit -m 'Disable GitHub Pages Jekyll.'
+```
+
+# References
+
 [Bypassing Jekyll on GitHub Pages](https://github.blog/2009-12-29-bypassing-jekyll-on-github-pages/):
 
 > It is now possible to completely bypass Jekyll processing on GitHub

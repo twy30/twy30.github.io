@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Git `HEAD~`</title>
+    <link href="/Template/Theme/bootstrap.min.css" rel="stylesheet">
+    <link href="/Template/Syntax-Highlighting/vs2015.min.css" rel="stylesheet">
+    <link href="/Template/Theme/customizations.css" rel="stylesheet">
+</head>
+
+<body>
+    <textarea id="Markdown-input" cols="80" rows="24">
+# Git `HEAD~`
+
+`HEAD~` means the first parent of the current branch's last commit.
+
+* `HEAD` (symbolically) references the current branch's last commit.
+* `~` is an ancestry specification, which means "the first parent".
+* `~` can be applied multiple times; for example:
+  * `HEAD~` is equivalent to `HEAD~1`, the first parent of `HEAD`;
+  * `HEAD~~` is equivalent to `HEAD~2`, the first parent of `HEAD~1`;
+  * `HEAD~~~` is equivalent to `HEAD~3`, the first parent of `HEAD~2`;
+  * And so on.
+
+# References
+
+[10.3 Git Internals - Git References; The HEAD](https://git-scm.com/book/en/v2/Git-Internals-Git-References):
+
+> Usually the HEAD file is a symbolic reference to the branch you’re
+> currently on. By symbolic reference, we mean that unlike a normal
+> reference, it contains a pointer to another reference.
+
+[7.1 Git Tools - Revision Selection; Ancestry References](https://git-scm.com/book/en/v2/Git-Tools-Revision-Selection):
+
+> The other main ancestry specification is the `~` (tilde). This also
+> refers to the first parent, so `HEAD~` and `HEAD^` are equivalent. The
+> difference becomes apparent when you specify a number. `HEAD~2` means
+> “the first parent of the first parent,” or “the grandparent” — it
+> traverses the first parents the number of times you specify. For
+> example, in the history listed earlier, `HEAD~3` would be:
+>
+> This can also be written `HEAD~~~`, which again is the first parent of
+> the first parent of the first parent:
+    </textarea>
+    <div id="HTML-output"></div>
+    <div lang="en">
+        <a href="https://github.com/twy30/twy30.github.io/discussions/categories/chat-q-a">
+            Chat / Q&A
+        </a>
+    </div>
+    <div lang="zh-Hant">
+        <a href="https://github.com/twy30/twy30.github.io/discussions/categories/%E9%96%92%E8%81%8A-%E5%95%8F%E7%AD%94">
+            閒聊／問答
+        </a>
+    </div>
+    <script defer src="/Template/Markdown-to-HTML/commonmark.min.js"></script>
+    <script defer src="/Template/Markdown-to-HTML/initialize.js"></script>
+    <script defer src="/Template/Theme/bootstrap.bundle.min.js"></script>
+    <script defer src="/Template/Syntax-Highlighting/highlight.min.js"></script>
+    <script defer src="/Template/Syntax-Highlighting/initialize.js"></script>
+</body>
+
+</html>

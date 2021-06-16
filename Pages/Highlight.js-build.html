@@ -19,51 +19,47 @@ git clone https://github.com/highlightjs/highlight.js.git
 cd highlight.js/
 git checkout tags/11.0.1
 npm install
-node tools/build.js --target cdn bash typescript xml
+node tools/build.js --target cdn bash json typescript xml
+
+# The built assets are in the `build` directory.  For example:
+#
+# * `build/highlight.min.js`
+# * `build/styles/vs2015.min.css`
 ```
 
-The built assets are placed in the `build` directory.  For example:
+# References
 
-* `/build/highlight.min.js`
-* `/build/styles/vs2015.min.css`
+[Build instructions and targets](https://github.com/highlightjs/highlight.js/blob/11.0.1/tools/build.js#L2-L59).
 
-See `/tools/build.js` for more details on build targets.
+[Supported Languages](https://github.com/highlightjs/highlight.js/tree/11.0.1/src/languages);
+each language `.js` file lists its names and aliases.  For example:
 
-## [Supported Languages](https://github.com/highlightjs/highlight.js/tree/11.0.1/src/languages)
-
-Each language `.js` file lists its names and aliases.  For example:
-
-### [`bash.js`](https://github.com/highlightjs/highlight.js/blob/11.0.1/src/languages/bash.js#L126-L127)
-
-```TypeScript
-    name: 'Bash',
-    aliases: ['sh'],
-```
-
-### [`typescript.js`](https://github.com/highlightjs/highlight.js/blob/11.0.1/src/languages/typescript.js#L92-L93)
-
-```TypeScript
-    name: 'TypeScript',
-    aliases: ['ts', 'tsx']
-```
-
-### [`xml.js`](https://github.com/highlightjs/highlight.js/blob/11.0.1/src/languages/xml.js#L77-L89)
-
-```TypeScript
-    name: 'HTML, XML',
-    aliases: [
-      'html',
-      'xhtml',
-      'rss',
-      'atom',
-      'xjb',
-      'xsd',
-      'xsl',
-      'plist',
-      'wsf',
-      'svg'
-    ],
-```
+* [`bash.js`](https://github.com/highlightjs/highlight.js/blob/11.0.1/src/languages/bash.js#L126-L127):
+  ```TypeScript
+  name: 'Bash',
+  aliases: ['sh'],
+  ```
+* [`typescript.js`](https://github.com/highlightjs/highlight.js/blob/11.0.1/src/languages/typescript.js#L92-L93):
+  ```TypeScript
+  name: 'TypeScript',
+  aliases: ['ts', 'tsx']
+  ```
+* [`xml.js`](https://github.com/highlightjs/highlight.js/blob/11.0.1/src/languages/xml.js#L77-L89):
+  ```TypeScript
+  name: 'HTML, XML',
+  aliases: [
+    'html',
+    'xhtml',
+    'rss',
+    'atom',
+    'xjb',
+    'xsd',
+    'xsl',
+    'plist',
+    'wsf',
+    'svg'
+  ],
+  ```
     </textarea>
     <div id="HTML-output"></div>
     <div lang="en">

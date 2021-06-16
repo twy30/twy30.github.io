@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-    <title>TWY30</title>
+    <title>How to Use PowerShell to Clone Physical Disk to Virtual Hard Disk</title>
     <link href="/Template/Theme/bootstrap.min.css" rel="stylesheet">
     <link href="/Template/Syntax-Highlighting/vs2015.min.css" rel="stylesheet">
     <link href="/Template/Theme/customizations.css" rel="stylesheet">
@@ -12,24 +12,34 @@
 
 <body>
     <textarea id="Markdown-input" cols="80" rows="24">
-<!-- <TableOfContents> -->
-* [Built-In and Default .NET Configurations](/Pages/-NET-configurations.html)
-* [Git `HEAD~`](/Pages/Git-HEAD-.html)
-* [How to Get Git Repository Root Path](/Pages/Git-repository-root-path.html)
-* [How to Squash Git Commits](/Pages/Git-squash-commits.html)
-* [How to Disable GitHub Pages Jekyll](/Pages/GitHub-Pages-disable-Jekyll.html)
-* [How to Build Highlight.js](/Pages/Highlight.js-build.html)
-* [HTML `charset`](/Pages/HTML-charset.html)
-* [HTML `lang`](/Pages/HTML-lang.html)
-* [The Minimum HTML](/Pages/HTML-minimum.html)
-* [HTML Self-Closing Tags](/Pages/HTML-self-closing-tags.html)
-* [How to Use PowerShell to Clone Physical Disk to Virtual Hard Disk](/Pages/PowerShell-clone-physical-disk-to-virtual-hard-disk.html)
-* [SVG `xmlns`](/Pages/SVG-xmlns.html)
-* [How to Make VSCode "Ask/Show Again"](/Pages/VSCode-ask-show-again/index.html)
-* [How to Use VSCode Keyboard Shortcut to Run Command in Terminal](/Pages/VSCode-keyboard-shortcut-run-command-in-terminal.html)
-* [How to Download Windows 10 ISO from Microsoft](/Pages/Windows-download-Windows-10-ISO-from-Microsoft.html)
+# How to Use PowerShell to Clone Physical Disk to Virtual Hard Disk
 
-<!-- </TableOfContents> -->
+(Run as Administrator) Use `New-VHD` with its `-SourceDisk` parameter.
+
+* Either `-Dynamic` or `-Fixed` must be used with `-SourceDisk`.
+* Use `Get-PhysicalDisk` to list physical disks and their `Number` for
+  `New-VHD`'s `-SourceDisk` parameter.
+
+# References
+
+[`New-VHD`](https://docs.microsoft.com/en-us/powershell/module/hyper-v/new-vhd?view=windowsserver2019-ps):
+
+> The `New-VHD` cmdlet creates one or more new virtual hard disks in
+> either VHD format or the newer VHDX format. The file name extension
+> you specify determines the format.
+
+> `-Dynamic`
+>
+> Specifies that a dynamic virtual hard disk is to be created.
+
+> `-Fixed`
+>
+> Specifies that a fixed virtual hard disk is to be created.
+
+> `-SourceDisk`
+>
+> Specifies the physical disk to be used as the source for the virtual
+> hard disk to be created.
     </textarea>
     <div id="HTML-output"></div>
     <div lang="en">
