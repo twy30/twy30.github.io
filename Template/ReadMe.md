@@ -10,6 +10,10 @@ See [`refresh-pages.bash`](refresh-pages.bash).
 
 See [`refresh-pages.bash`](refresh-pages.bash).
 
+# How to Update Markdown Titles with HTML Titles
+
+See [`refresh-pages.bash`](refresh-pages.bash).
+
 # How to Get 3rd-Party Libraries
 
 ```Bash
@@ -37,3 +41,12 @@ popd
 is a custom-built, slim version of Highlight.js.  See
 [How to Build Highlight.js](https://www.twy30.com/Pages/Highlight.js-build.html)
 for more details.
+
+# How to Get Template Segment Marker ID
+
+```Bash
+myWorkspacePath=$(git rev-parse --show-toplevel)
+pushd "${myWorkspacePath}"
+dotnet run --project Template/Code/GetSegmentMarkerID/
+popd
+```

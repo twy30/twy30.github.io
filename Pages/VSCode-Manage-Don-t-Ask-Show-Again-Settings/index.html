@@ -1,32 +1,60 @@
 <!DOCTYPE html>
+<!-- HtmlLang CcBpp/7GB"XMD#c:5eBV,\pX~Ha2W6P7_f,=m}+56 -->
 <html lang="en">
+<!-- HtmlLang GZuB|*3;H=xg:B'Az2559~A<QK1EQ=;n<=wg,3pB" -->
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-    <title>How to Make VSCode "Ask/Show Again"</title>
+    <!-- Title &*Id@2O~~c@j^]<YCh{8/t(DJ1"+ilLm-1q-uvHrc -->
+    <title>VSCode: Manage "Don't Ask/Show Again" Settings</title>
+    <!-- Title mKDJo*fWc"c1Iprcy%~UJdWAip)(.h/I%^\Z>zbqm -->
     <link href="/Template/Theme/bootstrap.min.css" rel="stylesheet">
     <link href="/Template/Syntax-Highlighting/vs2015.min.css" rel="stylesheet">
     <link href="/Template/Theme/customizations.css" rel="stylesheet">
 </head>
 
 <body>
+    <!-- MarkdownInput XUSmR^t4:hNGdI``s#T)Yt^'tt=)~TS#<JNY3#+v) -->
     <textarea id="Markdown-input" cols="80" rows="24">
-# How to Make VSCode "Ask/Show Again"
+# VSCode: Manage "Don't Ask/Show Again" Settings
 
-There is no easy or simple solution.
+As of 2021-May-25 (VSCode 1.55.2), there are 2 subproblems:
 
-## Problem: Each Dialog/Prompt may be Controlled Differently
+* Discoverability: How does a dialog/prompt manage its
+  "Don't Ask/Show Again" setting?  Each dialog/prompt may work
+  differently.  Some may use "configuration"; some may use "state".
+* Accessibility: How to modify a dialog/prompt's "Don't Ask/Show Again"
+  setting?  Modifying "configuration" (`settings.json` files) may be
+  straightforward; modifying "state" (`state.vscdb` SQLite database
+  files) may be complicated.
+
+In 2021-Jan, VSCode team
+[tried](https://github.com/microsoft/vscode/issues/24815#ref-issue-765759532)
+to address
+[this problem](https://github.com/microsoft/vscode/issues/24815) by
+making "Don't Ask/Show Again" notifications and settings
+[more discoverable and accessible](https://github.com/microsoft/vscode/pull/114114).
+However,
+[it](https://github.com/microsoft/vscode/pull/114114#event-4252538698)
+[may](https://github.com/microsoft/vscode/pull/114114#event-4376614212)
+[take](https://github.com/microsoft/vscode/pull/114114#event-4502782086)
+[a](https://github.com/microsoft/vscode/pull/114114#event-4632463665)
+[while](https://github.com/microsoft/vscode/pull/114114#event-4751945004)
+before the proposed solution becomes available.
+
+## Subproblem: Discoverability
 
 Take Microsoft's
 [C# extension for VSCode](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)
 for example.
 
-### Asset Prompt
+The "Asset Prompt":
 
 ![Screenshot of Asset Prompt](assetPrompt.png "Screenshot of Asset Prompt")
 
-The "Asset Prompt" is controlled by [`assetPromptDisabled`, stored in `workspaceState`](https://github.com/OmniSharp/omnisharp-vscode/blob/8dd7f44d99bfc8e0b770a4e7701fa922b65be934/src/omnisharp/extension.ts#L131-L140):
+Its "Don't Ask/Show Again" setting is
+[named `assetPromptDisabled` and stored in `workspaceState`](https://github.com/OmniSharp/omnisharp-vscode/blob/v1.23.11/src/omnisharp/extension.ts#L131-L140):
 
 ```TypeScript
 if (!context.workspaceState.get<boolean>('assetPromptDisabled')) {
@@ -41,23 +69,22 @@ if (!context.workspaceState.get<boolean>('assetPromptDisabled')) {
 }
 ```
 
-This one is not trivial to learn without examinging the code.
+This one is not trivial to discover without examinging the code.
 
-### Blazor Debug Prompt
+On the other hand, the "Blazor Debug Prompt":
 
 ![Screenshot of Blazor Debug Prompt](BlazorDebugPrompt.png "Screenshot of Blazor Debug Prompt")
 
-The "Blazor Debug Prompt" is controlled by [`disableBlazorDebugPrompt`, stored in `WorkspaceConfiguration`](https://github.com/OmniSharp/omnisharp-vscode/blob/8dd7f44d99bfc8e0b770a4e7701fa922b65be934/src/omnisharp/utils.ts#L267-L285):
+Its "Don't Ask/Show Again" setting is
+[named `disableBlazorDebugPrompt` and stored in `WorkspaceConfiguration`](https://github.com/OmniSharp/omnisharp-vscode/blob/v1.23.11/src/omnisharp/utils.ts#L267-L285):
 
 ```TypeScript
 function showBlazorConfigurationRequiredPrompt(server: OmniSharpServer, configuration: vscode.WorkspaceConfiguration) {
     const disableBlazorDebugPrompt = configuration.get('disableBlazorDebugPrompt');
 
-
     const promptShownKey = 'blazor_configuration_required_prompt_shown';
     if (!disableBlazorDebugPrompt && !server.sessionProperties[promptShownKey]) {
         server.sessionProperties[promptShownKey] = true;
-
 
         vscode.window.showInformationMessage('Additional setup is required to debug Blazor WebAssembly applications.', 'Don\'t Ask Again', 'Learn more', 'Close')
             .then(async result => {
@@ -73,45 +100,30 @@ function showBlazorConfigurationRequiredPrompt(server: OmniSharpServer, configur
 }
 ```
 
-This one is more noticeable because it is listed under the C#
-extension's "Feature Contributions, Settings".
+This one is more discoverable because: inside VSCode, this setting is
+listed under the "C#" extension's "Feature Contributions" tab's
+"Settings" section.
 
-## Problem: `globalState` and `workspaceState` are Tricky to Modify
+## Subproblem: Accessibility
 
-By default, as of VSCode 1.55.2, on Windows 10, `globalState` and
-`workspaceState` are, respectively, stored under VSCode's "user data"
-directory:
+While it is straightforward to access VSCode's "configuration"
+`settings.json` files, VSCode's "state" works differently.
+
+As of VSCode 1.55.2, `globalState` and `workspaceState` are,
+respectively, stored under VSCode's "user data" directory; for example:
 
 * `%AppData%\Code\User\globalStorage\state.vscdb`
 * `%AppData%\Code\User\workspaceStorage\__Workspace_ID__\state.vscdb`
-  * `%AppData%\Code\User\workspaceStorage\__Workspace_ID__\workspace.json`
-    contains the `folder` property indicating the path to the workspace
-    folder.
+  * Each `User\workspaceStorage\__Workspace_ID__\workspace.json`
+    contains the `folder` property indicating the workspace's path.
 
-`state.vscdb` is a SQLite database and can be modified with common
-SQLite tools.
-
-It is likely better to completely shut down VSCode first before
-modifying `state.vscdb`.
-
-## Solution (?)
-
-In 2021-Jan, VSCode team
-[tried](https://github.com/microsoft/vscode/issues/24815#ref-issue-765759532)
-to address this problem.  The
-[proposed solution](https://github.com/microsoft/vscode/pull/114114)
-appears to provide an API to standardize the "Don't Show Again" option;
-and a management UI.
-
-However, as of 2021-May-25,
-[it](https://github.com/microsoft/vscode/pull/114114#event-4252538698)
-[may](https://github.com/microsoft/vscode/pull/114114#event-4376614212)
-[take](https://github.com/microsoft/vscode/pull/114114#event-4502782086)
-[a](https://github.com/microsoft/vscode/pull/114114#event-4632463665)
-[while](https://github.com/microsoft/vscode/pull/114114#event-4751945004)
-before the proposed solution becomes available.
+`state.vscdb` files are SQLite databases and can be modified with common
+SQLite tools.  It is likely a good practice to completely shut down
+VSCode before modifying `state.vscdb` files.
     </textarea>
+    <!-- MarkdownInput tbDQ17gb%Fv[<K9b7j9Iikei1qIWJ@H32PkobmOby -->
     <div id="HTML-output"></div>
+    <hr>
     <div lang="en">
         <a href="https://github.com/twy30/twy30.github.io/discussions/categories/chat-q-a">
             Chat / Q&A

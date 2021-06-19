@@ -8,6 +8,7 @@ namespace ClassLibrary
         public const string CopyMe_html = "CopyMe.html";
         public const string htmlSearchPattern = "*.html";
         public const string index_html = "index.html";
+        public const string Newline = "\n";
         public const string Pages = "Pages";
         public const string Template = "Template";
 

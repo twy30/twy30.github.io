@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <!-- Title &*Id@2O~~c@j^]<YCh{8/t(DJ1"+ilLm-1q-uvHrc -->
-    <title>404 Not Found</title>
+    <title>PowerShell: Clone Physical Disk to Virtual Hard Disk</title>
     <!-- Title mKDJo*fWc"c1Iprcy%~UJdWAip)(.h/I%^\Z>zbqm -->
     <link href="/Template/Theme/bootstrap.min.css" rel="stylesheet">
     <link href="/Template/Syntax-Highlighting/vs2015.min.css" rel="stylesheet">
@@ -17,15 +17,42 @@
 <body>
     <!-- MarkdownInput XUSmR^t4:hNGdI``s#T)Yt^'tt=)~TS#<JNY3#+v) -->
     <textarea id="Markdown-input" cols="80" rows="24">
-# 404 Not Found
+# PowerShell: Clone Physical Disk to Virtual Hard Disk
 
-[Let us know what you are looking for.](https://github.com/twy30/twy30.github.io/discussions/categories/chat-q-a)
+(Run as Administrator) Use `New-VHD` with its `-SourceDisk` parameter.
 
-<div lang="zh-Hant">
-    <a href="https://github.com/twy30/twy30.github.io/discussions/categories/%E9%96%92%E8%81%8A-%E5%95%8F%E7%AD%94">
-        讓我們知道您在找什麼。
-    </a>
-</div>
+```PowerShell
+# Clone the physical disk No. `9` to the virtual hard disk
+# `.\example.vhdx`.
+
+New-VHD -Path .\example.vhdx -SourceDisk 9 -Dynamic
+```
+
+* Use `Get-PhysicalDisk` to list physical disks.
+  * Each physical disk has a `Number` property, whose value can be used
+    for `New-VHD`'s `-SourceDisk` parameter.
+* Either `-Dynamic` or `-Fixed` must be specified with `-SourceDisk`.
+
+# References
+
+[`New-VHD`](https://docs.microsoft.com/en-us/powershell/module/hyper-v/new-vhd?view=windowsserver2019-ps):
+
+> The `New-VHD` cmdlet creates one or more new virtual hard disks in
+> either VHD format or the newer VHDX format. The file name extension
+> you specify determines the format.
+
+> `-Dynamic`
+>
+> Specifies that a dynamic virtual hard disk is to be created.
+
+> `-Fixed`
+>
+> Specifies that a fixed virtual hard disk is to be created.
+
+> `-SourceDisk`
+>
+> Specifies the physical disk to be used as the source for the virtual
+> hard disk to be created.
     </textarea>
     <!-- MarkdownInput tbDQ17gb%Fv[<K9b7j9Iikei1qIWJ@H32PkobmOby -->
     <div id="HTML-output"></div>

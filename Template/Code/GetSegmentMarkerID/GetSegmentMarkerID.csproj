@@ -1,0 +1,21 @@
+<!--
+This "Console Application (console)" is created with this template:
+
+```
+  Microsoft.DotNet.Common.ProjectTemplates.5.0
+    Details:
+      NuGetPackageId: Microsoft.DotNet.Common.ProjectTemplates.5.0
+      Version: 5.0.300-preview.21260.2
+      Author: Microsoft
+```
+-->
+
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+</Project>

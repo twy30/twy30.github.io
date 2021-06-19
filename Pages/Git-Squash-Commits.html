@@ -1,37 +1,57 @@
 <!DOCTYPE html>
+<!-- HtmlLang CcBpp/7GB"XMD#c:5eBV,\pX~Ha2W6P7_f,=m}+56 -->
 <html lang="en">
+<!-- HtmlLang GZuB|*3;H=xg:B'Az2559~A<QK1EQ=;n<=wg,3pB" -->
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-    <title>How to Disable GitHub Pages Jekyll</title>
+    <!-- Title &*Id@2O~~c@j^]<YCh{8/t(DJ1"+ilLm-1q-uvHrc -->
+    <title>Git: Squash Commits</title>
+    <!-- Title mKDJo*fWc"c1Iprcy%~UJdWAip)(.h/I%^\Z>zbqm -->
     <link href="/Template/Theme/bootstrap.min.css" rel="stylesheet">
     <link href="/Template/Syntax-Highlighting/vs2015.min.css" rel="stylesheet">
     <link href="/Template/Theme/customizations.css" rel="stylesheet">
 </head>
 
 <body>
+    <!-- MarkdownInput XUSmR^t4:hNGdI``s#T)Yt^'tt=)~TS#<JNY3#+v) -->
     <textarea id="Markdown-input" cols="80" rows="24">
-# How to Disable GitHub Pages Jekyll
+# Git: Squash Commits
 
-```Bash
-myGitRepositoryRootPath=$(git rev-parse --show-toplevel)
-cd "${myGitRepositoryRootPath}"
-myNoJekyllFilename=.nojekyll
-touch "${myNoJekyllFilename}"
-git add "${myNoJekyllFilename}"
-git commit -m 'Disable GitHub Pages Jekyll.'
-```
+* `rebase --interactive` for granularity
+* `reset --soft` for simplicity
+* `merge --squash` for branches
 
 # References
 
-[Bypassing Jekyll on GitHub Pages](https://github.blog/2009-12-29-bypassing-jekyll-on-github-pages/):
+[`rebase --interactive`](https://git-scm.com/docs/git-rebase/2.20.0#Documentation/git-rebase.txt---interactive):
 
-> It is now possible to completely bypass Jekyll processing on GitHub
-> Pages by creating a file named `.nojekyll` in the root of your pages
-> repo and pushing it to GitHub.
+```Bash
+# Let the user choose how to reapply each of the commits after `HEAD~3`.
+
+git rebase --interactive HEAD~3
+```
+
+[`reset --soft`](https://git-scm.com/docs/git-reset/2.20.0#Documentation/git-reset.txt---soft):
+
+```Bash
+# Reset `HEAD` to `HEAD~3` and leave the changes as is.
+
+git reset --soft HEAD~3
+```
+
+[`merge --squash`](https://git-scm.com/docs/git-merge/2.20.0#Documentation/git-merge.txt---squash):
+
+```Bash
+# Stage changes from `__Branch_B__` in the current branch.
+
+git merge --squash __Branch_B__
+```
     </textarea>
+    <!-- MarkdownInput tbDQ17gb%Fv[<K9b7j9Iikei1qIWJ@H32PkobmOby -->
     <div id="HTML-output"></div>
+    <hr>
     <div lang="en">
         <a href="https://github.com/twy30/twy30.github.io/discussions/categories/chat-q-a">
             Chat / Q&A

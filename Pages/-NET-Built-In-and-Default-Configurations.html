@@ -1,28 +1,30 @@
 <!DOCTYPE html>
+<!-- HtmlLang CcBpp/7GB"XMD#c:5eBV,\pX~Ha2W6P7_f,=m}+56 -->
 <html lang="en">
+<!-- HtmlLang GZuB|*3;H=xg:B'Az2559~A<QK1EQ=;n<=wg,3pB" -->
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-    <title>Built-In and Default .NET Configurations</title>
+    <!-- Title &*Id@2O~~c@j^]<YCh{8/t(DJ1"+ilLm-1q-uvHrc -->
+    <title>.NET: Built-In and Default Configurations</title>
+    <!-- Title mKDJo*fWc"c1Iprcy%~UJdWAip)(.h/I%^\Z>zbqm -->
     <link href="/Template/Theme/bootstrap.min.css" rel="stylesheet">
     <link href="/Template/Syntax-Highlighting/vs2015.min.css" rel="stylesheet">
     <link href="/Template/Theme/customizations.css" rel="stylesheet">
 </head>
 
 <body>
+    <!-- MarkdownInput XUSmR^t4:hNGdI``s#T)Yt^'tt=)~TS#<JNY3#+v) -->
     <textarea id="Markdown-input" cols="80" rows="24">
-# Built-In and Default .NET Configurations
+# .NET: Built-In and Default Configurations
 
-* `Debug` (default):
-  * `DebugSymbols`: `true`
-  * `Optimize`: `false`
-* `Release`
-  * `Optimize`: `true`
+* `Debug` (default; `DebugSymbols`: `true`; `Optimize`: `false`)
+* `Release` (`Optimize`: `true`)
 
 # References
 
-[Default configuration](https://github.com/dotnet/sdk/blob/v5.0.301/src/Tasks/Microsoft.NET.Build.Tasks/targets/Microsoft.NET.Sdk.props#L19-L25):
+[Default configuration: `Debug`](https://github.com/dotnet/sdk/blob/v5.0.301/src/Tasks/Microsoft.NET.Build.Tasks/targets/Microsoft.NET.Sdk.props#L19-L25):
 
 ```XML
 <!-- Default configuration and platform to Debug|AnyCPU-->
@@ -34,7 +36,7 @@
 </PropertyGroup>
 ```
 
-[Built-in configurations](https://github.com/dotnet/sdk/blob/v5.0.301/src/Tasks/Microsoft.NET.Build.Tasks/targets/Microsoft.NET.Sdk.props#L37-L45):
+[Differences between `Debug` and `Release`](https://github.com/dotnet/sdk/blob/v5.0.301/src/Tasks/Microsoft.NET.Build.Tasks/targets/Microsoft.NET.Sdk.props#L37-L45):
 
 ```XML
 <!-- User-facing configuration-specific defaults -->
@@ -48,7 +50,9 @@
 </PropertyGroup>
 ```
     </textarea>
+    <!-- MarkdownInput tbDQ17gb%Fv[<K9b7j9Iikei1qIWJ@H32PkobmOby -->
     <div id="HTML-output"></div>
+    <hr>
     <div lang="en">
         <a href="https://github.com/twy30/twy30.github.io/discussions/categories/chat-q-a">
             Chat / Q&A
