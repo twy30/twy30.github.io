@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!-- HtmlLang CcBpp/7GB"XMD#c:5eBV,\pX~Ha2W6P7_f,=m}+56 -->
+<html lang="en">
+<!-- HtmlLang GZuB|*3;H=xg:B'Az2559~A<QK1EQ=;n<=wg,3pB" -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <!-- Title &*Id@2O~~c@j^]<YCh{8/t(DJ1"+ilLm-1q-uvHrc -->
+    <title>highlight.js: Build</title>
+    <!-- Title mKDJo*fWc"c1Iprcy%~UJdWAip)(.h/I%^\Z>zbqm -->
+    <link href="/Template/Theme/bootstrap.min.css" rel="stylesheet">
+    <link href="/Template/Syntax-Highlighting/vs2015.min.css" rel="stylesheet">
+    <link href="/Template/Theme/customizations.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- MarkdownInput XUSmR^t4:hNGdI``s#T)Yt^'tt=)~TS#<JNY3#+v) -->
+    <textarea id="Markdown-input" cols="80" rows="24">
+# highlight.js: Build
+
+```Bash
+# Build highlight.js.
+
+git clone https://github.com/highlightjs/highlight.js.git
+cd highlight.js/
+git checkout tags/11.0.1
+
+npm install
+
+node tools/build.js --target cdn bash javascript json plaintext powershell typescript xml
+```
+
+The built assets are in the `build` directory; for example:
+
+* `build/highlight.min.js`
+* `build/styles/vs2015.min.css`
+
+# References
+
+[Build instructions and targets](https://github.com/highlightjs/highlight.js/blob/11.0.1/tools/build.js#L2-L59).
+
+[Supported Languages](https://github.com/highlightjs/highlight.js/tree/11.0.1/src/languages);
+each language `.js` file lists its names and aliases.  For example:
+
+* [`bash.js`](https://github.com/highlightjs/highlight.js/blob/11.0.1/src/languages/bash.js#L126-L127):
+  ```JavaScript
+  name: 'Bash',
+  aliases: ['sh'],
+  ```
+* [`javascript.js`](https://github.com/highlightjs/highlight.js/blob/11.0.1/src/languages/javascript.js#L377-L378):
+  ```JavaScript
+  name: 'Javascript',
+  aliases: ['js', 'jsx', 'mjs', 'cjs'],
+  ```
+* [`json.js`](https://github.com/highlightjs/highlight.js/blob/11.0.1/src/languages/json.js#L34):
+  ```JavaScript
+  name: 'JSON',
+  ```
+* [`plaintext.js`](https://github.com/highlightjs/highlight.js/blob/11.0.1/src/languages/plaintext.js#L10-L14):
+  ```JavaScript
+  name: 'Plain text',
+  aliases: [
+    'text',
+    'txt'
+  ],
+  ```
+* [`powershell.js`](https://github.com/highlightjs/highlight.js/blob/11.0.1/src/languages/powershell.js#L346-L347):
+  ```JavaScript
+  name: 'PowerShell',
+  aliases: [
+  ```
+* [`typescript.js`](https://github.com/highlightjs/highlight.js/blob/11.0.1/src/languages/typescript.js#L92-L93):
+  ```JavaScript
+  name: 'TypeScript',
+  aliases: ['ts', 'tsx']
+  ```
+* [`xml.js`](https://github.com/highlightjs/highlight.js/blob/11.0.1/src/languages/xml.js#L77-L89):
+  ```JavaScript
+  name: 'HTML, XML',
+  aliases: [
+    'html',
+    'xhtml',
+    'rss',
+    'atom',
+    'xjb',
+    'xsd',
+    'xsl',
+    'plist',
+    'wsf',
+    'svg'
+  ],
+  ```
+    </textarea>
+    <!-- MarkdownInput tbDQ17gb%Fv[<K9b7j9Iikei1qIWJ@H32PkobmOby -->
+    <div id="HTML-output"></div>
+    <hr>
+    <div lang="en">
+        <a href="https://github.com/twy30/twy30.github.io/discussions/categories/chat-q-a">
+            Chat / Q&A
+        </a>
+    </div>
+    <div lang="zh-Hant">
+        <a href="https://github.com/twy30/twy30.github.io/discussions/categories/%E9%96%92%E8%81%8A-%E5%95%8F%E7%AD%94">
+            閒聊／問答
+        </a>
+    </div>
+    <script defer src="/Template/Markdown-to-HTML/commonmark.min.js"></script>
+    <script defer src="/Template/Markdown-to-HTML/initialize.js"></script>
+    <script defer src="/Template/Theme/bootstrap.bundle.min.js"></script>
+    <script defer src="/Template/Syntax-Highlighting/highlight.min.js"></script>
+    <script defer src="/Template/Syntax-Highlighting/initialize.js"></script>
+</body>
+
+</html>

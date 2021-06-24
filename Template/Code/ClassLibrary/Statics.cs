@@ -16,7 +16,9 @@ namespace ClassLibrary
         {
             if (arguments.Length <= index)
             {
-                throw new ArgumentException($"{nameof(arguments)}[{index}] `{name}` must be specified.");
+                throw new ArgumentException(
+                    $"`{name}` must be specified.",
+                    $"{nameof(arguments)}[{index}]");
             }
             return arguments[index];
         }

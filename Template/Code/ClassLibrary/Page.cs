@@ -35,6 +35,10 @@ namespace ClassLibrary
                 parser = new(patternBuilder.ToString(), RegexOptions.CultureInvariant | RegexOptions.Singleline);
                 parserCache[markers] = parser;
 
+                void AddLazyTemplateParser(string start, string end) => AddTemplateParser(start, ".*?", end);
+
+                void AddGreedyTemplateParser(string start, string end) => AddTemplateParser(start, ".*", end);
+
                 string GetEscapedMarker(string marker)
                 {
                     if (!escapedMarkers.TryGetValue(key: marker, out string? escapedMarker))
@@ -45,17 +49,10 @@ namespace ClassLibrary
                     return escapedMarker;
                 }
 
-                void AddLazyTemplateParser(string start, string end) => patternBuilder
+                void AddTemplateParser(string start, string data, string end) => patternBuilder
                     .Append("(")
                     .Append(GetEscapedMarker(start))
-                    .Append(".*?")
-                    .Append(GetEscapedMarker(end))
-                    .Append(")");
-
-                void AddGreedyTemplateParser(string start, string end) => patternBuilder
-                    .Append("(")
-                    .Append(GetEscapedMarker(start))
-                    .Append(".*")
+                    .Append(data)
                     .Append(GetEscapedMarker(end))
                     .Append(")");
             }

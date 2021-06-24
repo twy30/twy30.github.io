@@ -1,7 +1,7 @@
 <!--
 This "Console Application (console)" is created with this template:
 
-```
+```Text
   Microsoft.DotNet.Common.ProjectTemplates.5.0
     Details:
       NuGetPackageId: Microsoft.DotNet.Common.ProjectTemplates.5.0
@@ -11,6 +11,10 @@ This "Console Application (console)" is created with this template:
 -->
 
 <Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary\ClassLibrary.csproj" />
+  </ItemGroup>
 
   <PropertyGroup>
     <Nullable>enable</Nullable>

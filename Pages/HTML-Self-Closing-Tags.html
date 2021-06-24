@@ -19,26 +19,22 @@
     <textarea id="Markdown-input" cols="80" rows="24">
 # HTML: Self-Closing Tags
 
-A foreign element's start tag can be marked as self-closing; for
+A foreign element's start tag can be *marked as* self-closing; for
 example:
 
 ```HTML
-<!-- Elements from the SVG namespace are "foreign elements". -->
+<!-- This `svg` element has a start tag and an end tag. -->
 <svg>
-    <!--
-        This `circle` element's start tag is marked as self-closing with
-        the `/` character.
-    -->
-    <circle cx="42" cy="42" r="42" />
+    <!-- This `circle` element has only a self-closing start tag. -->
+    <circle cx="30" cy="10" r="20" />
 </svg>
 ```
 
-A void element can be written like a self-closing tag; for example:
+A void element can be *written like* a self-closing tag; for example:
 
 ```HTML
 <!--
-    A void element, such as these `br` and `hr` elements, has no end
-    tag.  The `/` character is optional.
+    Void elements have only start tags.  The `/` character is optional.
 -->
 <br>
 <hr />
@@ -50,7 +46,7 @@ A void element can be written like a self-closing tag; for example:
 
 > Then, if the element is one of the void elements, or if the element is
 > a foreign element, then there may be a single U+002F SOLIDUS character
-> (/). This character has no effect on void elements, but on foreign
+> (`/`). This character has no effect on void elements, but on foreign
 > elements it marks the start tag as self-closing.
 
 [Foreign elements](https://www.w3.org/TR/2021/SPSD-html52-20210128/syntax.html#foreign-elements):
@@ -59,8 +55,8 @@ A void element can be written like a self-closing tag; for example:
 
 [Void elements](https://www.w3.org/TR/2021/SPSD-html52-20210128/syntax.html#void-elements):
 
-> area, base, br, col, embed, hr, img, input, link, meta, param, source,
-> track, wbr
+> `area`, `base`, `br`, `col`, `embed`, `hr`, `img`, `input`, `link`,
+> `meta`, `param`, `source`, `track`, `wbr`
 
 [8.1.2. Elements](https://www.w3.org/TR/2021/SPSD-html52-20210128/syntax.html#writing-html-documents-elements):
 
@@ -79,7 +75,7 @@ A void element can be written like a self-closing tag; for example:
 > put between the start tag and the end tag). Foreign elements whose
 > start tag is not marked as self-closing can have text, character
 > references, CDATA sections, other elements, and comments, but the text
-> must not contain the character U+003C LESS-THAN SIGN (<) or an
+> must not contain the character U+003C LESS-THAN SIGN (`<`) or an
 > ambiguous ampersand.
     </textarea>
     <!-- MarkdownInput tbDQ17gb%Fv[<K9b7j9Iikei1qIWJ@H32PkobmOby -->

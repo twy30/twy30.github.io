@@ -19,9 +19,12 @@
     <textarea id="Markdown-input" cols="80" rows="24">
 # HTML: The Minimum
 
+[The W3C Markup Validation Service](https://validator.w3.org/) (version
+21.6.23) reports 0 error for this minimum HTML:
+
 ```HTML
 <!DOCTYPE html>
-<title></title>
+<title>?</title>
 ```
 
 # References
@@ -61,6 +64,38 @@
 >
 > Otherwise: One or more elements of metadata content, of which exactly
 > one is a title element and no more than one is a base element.
+
+[4.2.2. The title element](https://www.w3.org/TR/2021/SPSD-html52-20210128/document-metadata.html#the-title-element):
+
+> Text that is not inter-element white space.
+
+[Text](https://www.w3.org/TR/2021/SPSD-html52-20210128/dom.html#text-content):
+
+> Text, in the context of content models, means either nothing, or Text
+> nodes. Text is sometimes used as a content model on its own, but is
+> also phrasing content, and can be inter-element white space (if the
+> Text nodes are empty or contain just space characters).
+
+> Text nodes and attribute values must consist of Unicode characters,
+> must not contain U+0000 characters, must not contain permanently
+> undefined Unicode characters (noncharacters), and must not contain
+> control characters other than space characters. This specification
+> includes extra constraints on the exact value of Text nodes and
+> attribute values depending on their precise context.
+
+[inter-element white space](https://www.w3.org/TR/2021/SPSD-html52-20210128/dom.html#inter-element-white-space):
+
+> The space characters are always allowed between elements. User agents
+> represent these characters between elements in the source markup as
+> Text nodes in the DOM. Empty Text nodes and Text nodes consisting of
+> just sequences of those characters are considered inter-element white
+> space.
+
+[space characters](https://www.w3.org/TR/2021/SPSD-html52-20210128/infrastructure.html#space-characters):
+
+> The space characters, for the purposes of this specification, are
+> U+0020 SPACE, U+0009 CHARACTER TABULATION (tab), U+000A LINE FEED
+> (LF), U+000C FORM FEED (FF), and U+000D CARRIAGE RETURN (CR).
     </textarea>
     <!-- MarkdownInput tbDQ17gb%Fv[<K9b7j9Iikei1qIWJ@H32PkobmOby -->
     <div id="HTML-output"></div>

@@ -19,13 +19,14 @@
     <textarea id="Markdown-input" cols="80" rows="24">
 # PowerShell: Clone Physical Disk to Virtual Hard Disk
 
-(Run as Administrator) Use `New-VHD` with its `-SourceDisk` parameter.
+(Run as Administrator) Use `New-VHD` with its `-SourceDisk` parameter;
+for example:
 
 ```PowerShell
 # Clone the physical disk No. `9` to the virtual hard disk
-# `.\example.vhdx`.
+# `example.vhdx`.
 
-New-VHD -Path .\example.vhdx -SourceDisk 9 -Dynamic
+New-VHD -Path example.vhdx -SourceDisk 9 -Dynamic
 ```
 
 * Use `Get-PhysicalDisk` to list physical disks.

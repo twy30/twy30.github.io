@@ -47,6 +47,6 @@ for more details.
 ```Bash
 myWorkspacePath=$(git rev-parse --show-toplevel)
 pushd "${myWorkspacePath}"
-dotnet run --project Template/Code/GetSegmentMarkerID/
+dotnet run --project Template/Code/GetSegmentMarker/
 popd
 ```

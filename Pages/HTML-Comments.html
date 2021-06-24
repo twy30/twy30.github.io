@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <!-- Title &*Id@2O~~c@j^]<YCh{8/t(DJ1"+ilLm-1q-uvHrc -->
-    <title>Highlight.js: Build</title>
+    <title>HTML: Comments</title>
     <!-- Title mKDJo*fWc"c1Iprcy%~UJdWAip)(.h/I%^\Z>zbqm -->
     <link href="/Template/Theme/bootstrap.min.css" rel="stylesheet">
     <link href="/Template/Syntax-Highlighting/vs2015.min.css" rel="stylesheet">
@@ -17,58 +17,41 @@
 <body>
     <!-- MarkdownInput XUSmR^t4:hNGdI``s#T)Yt^'tt=)~TS#<JNY3#+v) -->
     <textarea id="Markdown-input" cols="80" rows="24">
-# Highlight.js: Build
+# HTML: Comments
 
-```Bash
-# Build Highlight.js.
-
-git clone https://github.com/highlightjs/highlight.js.git
-cd highlight.js/
-git checkout tags/11.0.1
-
-npm install
-
-node tools/build.js --target cdn bash json powershell typescript xml
-
-# The built assets are in the `build` directory; for example:
-#
-# * `build/highlight.min.js`
-# * `build/styles/vs2015.min.css`
-```
+1. Start with `<!--`.
+2. Optional text:
+   * Must not start with:
+     * `>`
+     * `->`
+   * Must not contain:
+     * `<!--`
+     * `-->`
+     * `--!>`
+   * Must not end with `<!-`.
+3. End with `-->`.
 
 # References
 
-[Build instructions and targets](https://github.com/highlightjs/highlight.js/blob/11.0.1/tools/build.js#L2-L59).
+[8.1.6. Comments](https://www.w3.org/TR/2021/SPSD-html52-20210128/syntax.html#comments):
 
-[Supported Languages](https://github.com/highlightjs/highlight.js/tree/11.0.1/src/languages);
-each language `.js` file lists its names and aliases.  For example:
+> Comments must have the following format:
+>
+> 1. The string `<!--`
+> 2. Optionally, text, with the additional restriction that the text
+>    must not start with the string `>`, nor start with the string `->`,
+>    nor contain the strings `<!--`, `-->`, or `--!>`, nor end with the
+>    string `<!-`.
+> 3. The string `-->`
+>
+> The text is allowed to end with the string `<!`, as in `<!--My favorite operators are > and <!-->`.
 
-* [`bash.js`](https://github.com/highlightjs/highlight.js/blob/11.0.1/src/languages/bash.js#L126-L127):
-  ```TypeScript
-  name: 'Bash',
-  aliases: ['sh'],
-  ```
-* [`typescript.js`](https://github.com/highlightjs/highlight.js/blob/11.0.1/src/languages/typescript.js#L92-L93):
-  ```TypeScript
-  name: 'TypeScript',
-  aliases: ['ts', 'tsx']
-  ```
-* [`xml.js`](https://github.com/highlightjs/highlight.js/blob/11.0.1/src/languages/xml.js#L77-L89):
-  ```TypeScript
-  name: 'HTML, XML',
-  aliases: [
-    'html',
-    'xhtml',
-    'rss',
-    'atom',
-    'xjb',
-    'xsd',
-    'xsl',
-    'plist',
-    'wsf',
-    'svg'
-  ],
-  ```
+[Text](https://www.w3.org/TR/2021/SPSD-html52-20210128/dom.html#text-content):
+
+> Text nodes and attribute values must consist of Unicode characters,
+> must not contain U+0000 characters, must not contain permanently
+> undefined Unicode characters (noncharacters), and must not contain
+> control characters other than space characters.
     </textarea>
     <!-- MarkdownInput tbDQ17gb%Fv[<K9b7j9Iikei1qIWJ@H32PkobmOby -->
     <div id="HTML-output"></div>

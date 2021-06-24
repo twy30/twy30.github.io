@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!-- HtmlLang CcBpp/7GB"XMD#c:5eBV,\pX~Ha2W6P7_f,=m}+56 -->
+<html lang="en">
+<!-- HtmlLang GZuB|*3;H=xg:B'Az2559~A<QK1EQ=;n<=wg,3pB" -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <!-- Title &*Id@2O~~c@j^]<YCh{8/t(DJ1"+ilLm-1q-uvHrc -->
+    <title>HTML: Raw Text and Escapable Raw Text Elements</title>
+    <!-- Title mKDJo*fWc"c1Iprcy%~UJdWAip)(.h/I%^\Z>zbqm -->
+    <link href="/Template/Theme/bootstrap.min.css" rel="stylesheet">
+    <link href="/Template/Syntax-Highlighting/vs2015.min.css" rel="stylesheet">
+    <link href="/Template/Theme/customizations.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- MarkdownInput XUSmR^t4:hNGdI``s#T)Yt^'tt=)~TS#<JNY3#+v) -->
+    <textarea id="Markdown-input" cols="80" rows="24">
+# HTML: Raw Text and Escapable Raw Text Elements
+
+* Raw text elements: `script`, `style`
+  * Can contain text.
+    * Text must not contain any "end tag string".
+* Escapable raw text elements: `textarea`, `title`
+  * Can contain text.
+    * Text must not contain any "end tag string".
+  * Can contain character references.
+  * Must not contain an ambiguous ampersand.
+
+## "End Tag String"
+
+An "end tag string" is "`</` +
+case-insensitive-match-of-element-tag-name + \_Special_Character_C_";
+for example:
+
+```HTML
+<title>Title-Text-Start</Title>Title-Text-End</title>
+```
+
+Between `Title-Text-Start` and `Title-Text-End`, the `</Title>` string
+is an "end tag string because:
+
+1. It starts with `</`.
+2. Then it is followed by `Title`, which is a case-insensitive match of
+   the `title` element's tag name: `title`.
+3. Then it is followed by `>`, one of the special characters:
+   * U+0009 CHARACTER TABULATION (tab)
+   * U+000A LINE FEED (LF)
+   * U+000C FORM FEED (FF)
+   * U+000D CARRIAGE RETURN (CR)
+   * U+0020 SPACE
+   * U+003E GREATER-THAN SIGN (`>`)
+   * U+002F SOLIDUS (`/`)
+
+# References
+
+[Raw text elements](https://www.w3.org/TR/2021/SPSD-html52-20210128/syntax.html#raw-text):
+
+> `script`, `style`
+
+> Raw text elements can have text, though it has restrictions described
+> below.
+
+[escapable raw text elements](https://www.w3.org/TR/2021/SPSD-html52-20210128/syntax.html#escapable-raw-text):
+
+> `textarea`, `title`
+
+> Escapable raw text elements can have text and character references,
+> but the text must not contain an ambiguous ampersand. There are also
+> further restrictions described below.
+
+[8.1.2.6. Restrictions on the contents of raw text and escapable raw text elements](https://www.w3.org/TR/2021/SPSD-html52-20210128/syntax.html#restrictions-on-the-contents-of-raw-text-and-escapable-raw-text-elements):
+
+> The text in raw text and escapable raw text elements must not contain
+> any occurrences of the string "`</`" (U+003C LESS-THAN SIGN, U+002F
+> SOLIDUS) followed by characters that case-insensitively match the tag
+> name of the element followed by one of U+0009 CHARACTER TABULATION
+> (tab), U+000A LINE FEED (LF), U+000C FORM FEED (FF), U+000D CARRIAGE
+> RETURN (CR), U+0020 SPACE, U+003E GREATER-THAN SIGN (`>`), or U+002F
+> SOLIDUS (`/`).
+
+[Text](https://www.w3.org/TR/2021/SPSD-html52-20210128/dom.html#text-content).
+
+[8.1.4. Character references](https://www.w3.org/TR/2021/SPSD-html52-20210128/syntax.html#character-references).
+
+[ambiguous ampersand](https://www.w3.org/TR/2021/SPSD-html52-20210128/syntax.html#ambiguous-ampersand).
+    </textarea>
+    <!-- MarkdownInput tbDQ17gb%Fv[<K9b7j9Iikei1qIWJ@H32PkobmOby -->
+    <div id="HTML-output"></div>
+    <hr>
+    <div lang="en">
+        <a href="https://github.com/twy30/twy30.github.io/discussions/categories/chat-q-a">
+            Chat / Q&A
+        </a>
+    </div>
+    <div lang="zh-Hant">
+        <a href="https://github.com/twy30/twy30.github.io/discussions/categories/%E9%96%92%E8%81%8A-%E5%95%8F%E7%AD%94">
+            閒聊／問答
+        </a>
+    </div>
+    <script defer src="/Template/Markdown-to-HTML/commonmark.min.js"></script>
+    <script defer src="/Template/Markdown-to-HTML/initialize.js"></script>
+    <script defer src="/Template/Theme/bootstrap.bundle.min.js"></script>
+    <script defer src="/Template/Syntax-Highlighting/highlight.min.js"></script>
+    <script defer src="/Template/Syntax-Highlighting/initialize.js"></script>
+</body>
+
+</html>

@@ -22,12 +22,14 @@
 As of 2021-May-25 (VSCode 1.55.2), there are 2 subproblems:
 
 * Discoverability: How does a dialog/prompt manage its
-  "Don't Ask/Show Again" setting?  Each dialog/prompt may work
-  differently.  Some may use "configuration"; some may use "state".
+  "Don't Ask/Show Again" setting?
+  * Each dialog/prompt may work differently.  Some may use
+    "configuration"; some may use "state".
 * Accessibility: How to modify a dialog/prompt's "Don't Ask/Show Again"
-  setting?  Modifying "configuration" (`settings.json` files) may be
-  straightforward; modifying "state" (`state.vscdb` SQLite database
-  files) may be complicated.
+  setting?
+  * Modifying "configuration" (`settings.json` files) may be
+    straightforward; modifying "state" (`state.vscdb` SQLite database
+    files) may be complicated.
 
 In 2021-Jan, VSCode team
 [tried](https://github.com/microsoft/vscode/issues/24815#ref-issue-765759532)

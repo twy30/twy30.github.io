@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!-- HtmlLang CcBpp/7GB"XMD#c:5eBV,\pX~Ha2W6P7_f,=m}+56 -->
+<html lang="en">
+<!-- HtmlLang GZuB|*3;H=xg:B'Az2559~A<QK1EQ=;n<=wg,3pB" -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <!-- Title &*Id@2O~~c@j^]<YCh{8/t(DJ1"+ilLm-1q-uvHrc -->
+    <title>Git: `core.quotePath` and Non-ASCII Filenames</title>
+    <!-- Title mKDJo*fWc"c1Iprcy%~UJdWAip)(.h/I%^\Z>zbqm -->
+    <link href="/Template/Theme/bootstrap.min.css" rel="stylesheet">
+    <link href="/Template/Syntax-Highlighting/vs2015.min.css" rel="stylesheet">
+    <link href="/Template/Theme/customizations.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- MarkdownInput XUSmR^t4:hNGdI``s#T)Yt^'tt=)~TS#<JNY3#+v) -->
+    <textarea id="Markdown-input" cols="80" rows="24">
+# Git: `core.quotePath` and Non-ASCII Filenames
+
+`core.quotePath` defaults to `true`: "unusual" characters in file paths
+are quoted and escaped; for example:
+
+1. In a Git repository, run `touch 0-漢-©-あ-a` (to create a test file
+   whose filename contains non-ASCII characters.)
+2. Run `git status` (and see that the non-ASCII characters are escaped):
+   ```Text
+   On branch main
+   Untracked files:
+     (use "git add <file>..." to include in what will be committed)
+
+           "0-\346\274\242-\302\251-\343\201\202-a"
+
+   nothing added to commit but untracked files present (use "git add" to track)
+   ```
+3. Run `git -c core.quotepath=false status` (and see that non-ASCII
+   characters are not escaped):
+   ```Text
+   On branch main
+   Untracked files:
+     (use "git add <file>..." to include in what will be committed)
+
+           0-漢-©-あ-a
+
+   nothing added to commit but untracked files present (use "git add" to track)
+   ```
+
+# References
+
+[`core.quotePath`](https://git-scm.com/docs/git-config/2.20.0#Documentation/git-config.txt-corequotePath):
+
+> Commands that output paths (e.g. `ls-files`, `diff`), will quote
+> "unusual" characters in the pathname by enclosing the pathname in
+> double-quotes and escaping those characters with backslashes in the
+> same way C escapes control characters (e.g. `\t` for TAB, `\n` for LF,
+> `\\` for backslash) or bytes with values larger than 0x80 (e.g. octal
+> `\302\265` for "micro" in UTF-8). If this variable is set to false,
+> bytes higher than 0x80 are not considered "unusual" any more.
+> Double-quotes, backslash and control characters are always escaped
+> regardless of the setting of this variable. A simple space character
+> is not considered "unusual". Many commands can output pathnames
+> completely verbatim using the -z option. The default value is true.
+
+[`git -c <name>=<value>`](https://git-scm.com/docs/git/2.20.0#Documentation/git.txt--cltnamegtltvaluegt):
+
+> Pass a configuration parameter to the command. The value given will
+> override values from configuration files. The `<name>` is expected in
+> the same format as listed by `git config` (subkeys separated by dots).
+    </textarea>
+    <!-- MarkdownInput tbDQ17gb%Fv[<K9b7j9Iikei1qIWJ@H32PkobmOby -->
+    <div id="HTML-output"></div>
+    <hr>
+    <div lang="en">
+        <a href="https://github.com/twy30/twy30.github.io/discussions/categories/chat-q-a">
+            Chat / Q&A
+        </a>
+    </div>
+    <div lang="zh-Hant">
+        <a href="https://github.com/twy30/twy30.github.io/discussions/categories/%E9%96%92%E8%81%8A-%E5%95%8F%E7%AD%94">
+            閒聊／問答
+        </a>
+    </div>
+    <script defer src="/Template/Markdown-to-HTML/commonmark.min.js"></script>
+    <script defer src="/Template/Markdown-to-HTML/initialize.js"></script>
+    <script defer src="/Template/Theme/bootstrap.bundle.min.js"></script>
+    <script defer src="/Template/Syntax-Highlighting/highlight.min.js"></script>
+    <script defer src="/Template/Syntax-Highlighting/initialize.js"></script>
+</body>
+
+</html>
